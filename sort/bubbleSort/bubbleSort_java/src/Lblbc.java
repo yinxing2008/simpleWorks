@@ -7,8 +7,12 @@
 public class Lblbc {
     public static void main(String[] args) {
         int[] array = {2, 1, 5, 4, 3};
+        System.out.println("排序前");
         printArray(array);
+
         sort(array);
+
+        System.out.println("排序后");
         printArray(array);
 
     }
@@ -26,7 +30,6 @@ public class Lblbc {
     }
 
     private static void printArray(int[] array) {
-        System.out.println("--------------");
         for (int i = 0; i < array.length; i++) {
             System.out.println(array[i] + "");
         }
