@@ -3,7 +3,7 @@ const routes: Array<RouteRecordRaw> = [
 	{
 		path: "/",
 		name: "home",
-		component: () => import("../lblbc_2048.vue"),
+		component: () => import("../lblbc_sort.vue"),
 	}
 ];
 const router = createRouter({
