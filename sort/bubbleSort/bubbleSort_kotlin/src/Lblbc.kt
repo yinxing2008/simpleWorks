@@ -29,6 +29,7 @@ private fun sort(array: IntArray) {
 
 private fun printArray(array: IntArray) {
     for (i in array.indices) {
-        println(array[i].toString() + "")
+        print(array[i].toString() + " ")
     }
+    println()
 }
