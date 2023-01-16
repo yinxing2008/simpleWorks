@@ -2,6 +2,7 @@ package cn.lblbc.bubblesort;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 /**
@@ -16,11 +17,13 @@ public class LblbcActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lblbc);
-
         int[] array = {2, 1, 5, 4, 3};
-        printArray(array);
-        sort(array);
-        printArray(array);
+        showArray(array);
+
+        findViewById(R.id.button).setOnClickListener(view -> {
+            sort(array);
+            showArray(array);
+        });
     }
 
     private void sort(int[] array) {
@@ -35,10 +38,12 @@ public class LblbcActivity extends AppCompatActivity {
         }
     }
 
-    private void printArray(int[] array) {
-        Log.i("lanbulan", "--------------");
-        for (int i = 0; i < array.length; i++) {
-            Log.i("lanbulan", array[i] + "");
+    private void showArray(int[] array) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int value : array) {
+            sb.append(value).append(" ");
         }
+        ((TextView) findViewById(R.id.textView)).setText(sb.toString());
     }
 }
