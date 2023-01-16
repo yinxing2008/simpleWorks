@@ -6,8 +6,12 @@
  */
 fun main() {
     val array = intArrayOf(2, 1, 5, 4, 3)
+    println("排序前")
     printArray(array)
+
     sort(array)
+
+    println("排序后")
     printArray(array)
 }
 
@@ -24,7 +28,6 @@ private fun sort(array: IntArray) {
 }
 
 private fun printArray(array: IntArray) {
-    println("--------------")
     for (i in array.indices) {
         println(array[i].toString() + "")
     }
