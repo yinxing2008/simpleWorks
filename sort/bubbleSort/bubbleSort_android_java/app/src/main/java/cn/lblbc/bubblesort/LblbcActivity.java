@@ -1,10 +1,10 @@
 package cn.lblbc.bubblesort;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 /**
  * 厦门大学计算机专业 | 前华为工程师
  * 专注《零基础学编程系列》  http://lblbc.cn/blog
@@ -12,18 +12,27 @@ import androidx.appcompat.app.AppCompatActivity;
  * 公众号：蓝不蓝编程
  */
 public class LblbcActivity extends AppCompatActivity {
+    int[] array = {2, 1, 5, 4, 3};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lblbc);
-        int[] array = {2, 1, 5, 4, 3};
         showArray(array);
 
-        findViewById(R.id.button).setOnClickListener(view -> {
+        findViewById(R.id.shuffleButton).setOnClickListener(view -> {
+            shuffle();
+            showArray(array);
+        });
+
+        findViewById(R.id.sortButton).setOnClickListener(view -> {
             sort(array);
             showArray(array);
         });
+    }
+
+    private void shuffle() {
+        array = new int[]{2, 1, 5, 4, 3};
     }
 
     private void sort(int[] array) {
