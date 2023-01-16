@@ -1,7 +1,8 @@
 package cn.lblbc.bubblesort
 
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 /**
@@ -16,9 +17,11 @@ class LblbcActivity : AppCompatActivity() {
         setContentView(R.layout.activity_lblbc)
 
         val array = intArrayOf(2, 1, 5, 4, 3)
-        printArray(array)
-        sort(array)
-        printArray(array)
+        showArray(array)
+        findViewById<View>(R.id.button).setOnClickListener {
+            sort(array)
+            showArray(array)
+        }
     }
 
     private fun sort(array: IntArray) {
@@ -33,10 +36,11 @@ class LblbcActivity : AppCompatActivity() {
         }
     }
 
-    private fun printArray(array: IntArray) {
-        Log.i("lanbulan", "--------------")
-        for (i in array.indices) {
-            Log.i("lanbulan", array[i].toString() + "")
+    private fun showArray(array: IntArray) {
+        val sb = StringBuilder()
+        for (value in array) {
+            sb.append(value).append(" ")
         }
+        (findViewById<View>(R.id.textView) as TextView).text = sb.toString()
     }
 }
