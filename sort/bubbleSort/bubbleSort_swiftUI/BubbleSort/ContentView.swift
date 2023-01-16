@@ -37,7 +37,7 @@ struct ContentView: View {
 }
 
 func shuffle() {
-    array.shuffle()
+    array = [2, 1, 5, 4, 3];
 }
 
 func sort() {
