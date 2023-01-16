@@ -57,20 +57,41 @@ class _MyHomePageState extends State<MyHomePage> {
               '$text',
               style: Theme.of(context).textTheme.headline4,
             ),
-            TextButton(
-              onPressed: () {
-                sort(list);
-                setState(() {
-                  text = convertToStr(list);
-                });
-              },
-              child: const Text('冒泡排序'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    shuffle(list);
+                    setState(() {
+                      text = convertToStr(list);
+                    });
+                  },
+                  child: const Text('打乱'),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    sort(list);
+                    setState(() {
+                      text = convertToStr(list);
+                    });
+                  },
+                  child: const Text('排序'),
+                ),
+              ],
             )
           ],
         ),
       ),
     );
   }
+}
+
+void shuffle(List<int> list) {
+  list.shuffle();
 }
 
 void sort(List<int> list) {
