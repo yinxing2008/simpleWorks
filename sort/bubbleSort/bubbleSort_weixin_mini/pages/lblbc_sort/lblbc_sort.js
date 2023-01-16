@@ -2,10 +2,16 @@ Page({
   data: {
     array: [],
     arrayStr: '',
-    isGameOver: false
   },
   onLoad: function () {
-    this.shuffle() 
+    this.shuffle()
+  },
+  shuffle() {
+    let array = [2, 1, 5, 4, 3]
+    this.setData({
+      array: array,
+      arrayStr: this.convertToStr(array),
+    })
   },
   sort() {
     let array = this.data.array
@@ -18,14 +24,6 @@ Page({
         }
       }
     }
-
-    this.setData({
-      array: array,
-      arrayStr: this.convertToStr(array),
-    })
-  },
-  shuffle() {
-    let array = [2, 1, 5, 4, 3]
     this.setData({
       array: array,
       arrayStr: this.convertToStr(array),
