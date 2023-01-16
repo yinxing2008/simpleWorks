@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * 公众号：蓝不蓝编程
  */
 public class LblbcActivity extends AppCompatActivity {
-    int[] array = {2, 1, 5, 4, 3};
+    private int[] array = {2, 1, 5, 4, 3};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

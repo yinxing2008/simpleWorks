@@ -12,16 +12,26 @@ import androidx.appcompat.app.AppCompatActivity
  * 公众号：蓝不蓝编程
  */
 class LblbcActivity : AppCompatActivity() {
+    private var array = intArrayOf(2, 1, 5, 4, 3)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lblbc)
 
-        val array = intArrayOf(2, 1, 5, 4, 3)
         showArray(array)
-        findViewById<View>(R.id.button).setOnClickListener {
+        findViewById<View>(R.id.shuffleButton).setOnClickListener { view: View? ->
+            shuffle()
+            showArray(array)
+        }
+
+        findViewById<View>(R.id.sortButton).setOnClickListener { view: View? ->
             sort(array)
             showArray(array)
         }
+    }
+
+    private fun shuffle() {
+        array = intArrayOf(2, 1, 5, 4, 3)
     }
 
     private fun sort(array: IntArray) {
