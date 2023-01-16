@@ -6,10 +6,10 @@
  -->
 <template>
   <div class="wrapper">
-    <div>arrayStr</div>
+    <div>{{ arrayStr }}</div>
     <div class="btn-row">
-      <div class="btn" bindtap="shuffle">打乱</div>
-      <div class="btn btn-right" bindtap="sort">排序</div>
+      <div class="btn" @click="shuffle">打乱</div>
+      <div class="btn btn-right" @click="sort">排序</div>
     </div>
   </div>
 </template>
@@ -19,20 +19,39 @@ export default {
   data() {
     return {
       array: [],
-    arrayStr: '',
+      arrayStr: ''
     }
   },
   mounted() {
-    this.shuffle() 
+    this.shuffle()
   },
   methods: {
-    startGame() {
-      this.isGameOver = false
-      this.cellArr = Array.from(Array(4)).map(() => Array(4).fill(0))
-      this.fillOneEmptyCell()
-      this.fillOneEmptyCell()
+    shuffle() {
+      let array = [2, 1, 5, 4, 3]
+      this.array = array
+      this.arrayStr = this.convertToStr(array)
     },
-    
+    sort() {
+      let array = this.array
+      for (let i = 0; i < array.length - 1; i++) {
+        for (let j = 0; j < array.length - 1 - i; j++) {
+          if (array[j] > array[j + 1]) {
+            let tmp = array[j + 1]
+            array[j + 1] = array[j]
+            array[j] = tmp
+          }
+        }
+      }
+      this.array = array
+      this.arrayStr = this.convertToStr(array)
+    },
+    convertToStr(array) {
+      var result = ''
+      for (let i = 0; i < array.length; i++) {
+        result += array[i] + ' '
+      }
+      return result
+    }
   }
 }
 </script>
@@ -45,7 +64,7 @@ export default {
   align-items: center;
   margin-top: 50px;
 }
-.btn-row{
+.btn-row {
   margin-top: 20px;
 }
 
@@ -58,12 +77,11 @@ export default {
   cursor: pointer;
   text-align: center;
   color: #f9f6f2;
-  background: #418DF9;
+  background: #418df9;
 }
 
 .btn-right {
   margin-left: 10px;
 }
-
 </style>
   
