@@ -12,18 +12,32 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text(arrayStr)
-            Button(action: {
-                sort()
-                arrayStr = convertToStr()
-            })
-            {
-                Text("冒泡排序")
-            }.padding()
+            HStack{
+                Button(action: {
+                    shuffle()
+                    arrayStr = convertToStr()
+                })
+                {
+                    Text("打乱")
+                }.padding()
+                Button(action: {
+                    sort()
+                    arrayStr = convertToStr()
+                })
+                {
+                    Text("排序")
+                }.padding()
+            }
+            
         }.onAppear(perform: {
             arrayStr = convertToStr()
         })
         .padding()
     }
+}
+
+func shuffle() {
+    array.shuffle()
 }
 
 func sort() {
