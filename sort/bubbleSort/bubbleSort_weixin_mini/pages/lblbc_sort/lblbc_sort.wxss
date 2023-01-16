@@ -18,7 +18,7 @@
   cursor: pointer;
   text-align: center;
   color: #f9f6f2;
-  background: #8f7a66;
+  background: #418DF9;
 }
 
 .btn-right {
