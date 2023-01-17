@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BubbleSort"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="200" Width="200">
     <Grid>
-        
+        <Label Name="label" Content="" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top"/>
+        <Button Name="shuffleButton" Content="打乱" HorizontalAlignment="Center" Margin="-35,90,0,0" VerticalAlignment="Top" Click="ShuffleButton_Click"/>
+        <Button Name="sortButton" Content="排序"  HorizontalAlignment="Center" Margin="35,90,0,0" VerticalAlignment="Top" Click="SortButton_Click"/>
+       
     </Grid>
 </Window>
