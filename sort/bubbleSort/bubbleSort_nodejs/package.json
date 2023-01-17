@@ -1,7 +1,7 @@
 {
-  "name": "blog_server_nodejs",
+  "name": "lblbc",
   "version": "1.0.0",
-  "description": "简单博客系统",
+  "description": "蓝不蓝编程",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon app.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitee.com/lblbc/cloud_blogs.git"
+    "url": "http://lblbc.cn/blog"
   },
   "keywords": [
     "nodejs",

@@ -6,35 +6,21 @@
  */
 const Sequelize = require('sequelize')
 
-// const sequelize = new Sequelize('lblbc_blog', 'root', '12345678', {
-//   dialect: 'mysql',
-//   host: 'localhost',
-//   port: 3306,
-//   logging: false,
-//   timezone: '+08:00',
-//   define: {
-//     // create_time && update_time
-//     timestamps: true,
-//     // delete_time
-//     paranoid: true,
-//     // 把驼峰命名转换为下划线
-//     underscored: true
-//   }
-// })
-
-const sequelize = new Sequelize({
+const sequelize = new Sequelize('lblbc_blog', 'root', '12345678', {
+  dialect: 'mysql',
   host: 'localhost',
-  dialect: 'sqlite',
-
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
-  },
-  storage: './lblbc_blog.db',
-  operatorsAliases: false
-});
+  port: 3306,
+  logging: false,
+  timezone: '+08:00',
+  define: {
+    // create_time && update_time
+    timestamps: true,
+    // delete_time
+    paranoid: true,
+    // 把驼峰命名转换为下划线
+    underscored: true
+  }
+})
 
 // 创建模型
 sequelize.sync({ force: false })
