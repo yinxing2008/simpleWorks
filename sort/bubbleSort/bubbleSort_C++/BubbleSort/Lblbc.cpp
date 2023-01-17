@@ -4,9 +4,6 @@
 /// 公众号：蓝不蓝编程
 
 #include <iostream>
-
-
-#include <iostream>
 using namespace std;
 
 void sort(int* array, int count)
