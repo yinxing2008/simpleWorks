@@ -13,8 +13,29 @@ const router = new Router({
 })
 
 router.get('sort', async (ctx) => {
-
-  ctx.body = "wwwwssss"
+  ctx.body = sort()
 })
+
+function sort() {
+  let array = [2, 1, 5, 4, 3]
+  for (let i = 0; i < array.length - 1; i++) {
+    for (let j = 0; j < array.length - 1 - i; j++) {
+      if (array[j] > array[j + 1]) {
+        let tmp = array[j + 1]
+        array[j + 1] = array[j]
+        array[j] = tmp
+      }
+    }
+  }
+  return convertToStr(array)
+}
+
+function convertToStr(array) {
+  var result = ''
+  for (let i = 0; i < array.length; i++) {
+    result += array[i] + ' '
+  }
+  return result
+}
 
 module.exports = router
