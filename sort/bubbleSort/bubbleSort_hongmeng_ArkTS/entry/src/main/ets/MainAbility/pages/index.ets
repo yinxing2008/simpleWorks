@@ -21,12 +21,14 @@ struct Lblbc {
         Button('打乱', { type: ButtonType.Normal })
           .borderRadius(5)
           .width(100)
+          .backgroundColor(0x418DF9)
           .onClick(() => {
             this.shuffle()
           })
         Button('排序', { type: ButtonType.Normal })
           .borderRadius(5)
           .width(100)
+          .backgroundColor(0x418DF9)
           .margin({ left: 10 })
           .onClick(() => {
             this.sort()
