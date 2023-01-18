@@ -15,15 +15,15 @@ def sort():
                 array[j], array[j + 1] = array[j + 1], array[j]
 
 
-def printarrayay():
+def printArray():
     for i in range(len(array)):
         print("%d" % array[i]),
 
 
 print("排序前:")
-printarrayay()
+printArray()
 
 sort()
 
 print("排序后:")
-printarrayay()
+printArray()
