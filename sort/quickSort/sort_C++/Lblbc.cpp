@@ -8,16 +8,17 @@
 using namespace std;
 
 
-void print(const vector<int>& array)
+void printArray(int* array, int count)
 {
-	for (auto val : array)
-		cout << val << " ";
-	cout << endl;
+	for (int i = 0; i < count; i++)
+	{
+		cout << array[i] << " ";
+	}
 }
 
-int partition(vector<int>& array, int low, int high)
+int partition(int* array, int low, int high)
 {
-	int pivot_value = array[low];//备份枢轴值
+	int pivot_value = array[low];
 	while (low < high) {
 		while (low < high && array[high] >= pivot_value) {
 			--high;
@@ -32,7 +33,7 @@ int partition(vector<int>& array, int low, int high)
 
 	return low;
 }
-void quickSort(vector<int>& array, int low, int high)
+void quickSort(int* array, int low, int high)
 {
 	int pivot_index;
 	if (low < high)
@@ -43,16 +44,17 @@ void quickSort(vector<int>& array, int low, int high)
 	}
 }
 
-void sort(vector<int>& array)
+void sort(int* array, int count)
 {
-	quickSort(array, 0, array.size() - 1);
+	quickSort(array, 0, count - 1);
 }
 
 int main()
 {
-	vector<int> array{ 2, 1, 5, 4, 3 };
-	cout << "排序前: "; print(array);
-	sort(array);
-	cout << "排序后: "; print(array);
+	int array[5] = { 2, 1, 5, 4, 3 };
+	int count = sizeof(array) / sizeof(int);
+	cout << "排序前: "; printArray(array,count);
+	sort(array,count);
+	cout << "排序后: "; printArray(array,count);
 	return 0;
 }
