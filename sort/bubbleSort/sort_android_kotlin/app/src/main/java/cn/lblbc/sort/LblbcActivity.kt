@@ -1,4 +1,4 @@
-package cn.lblbc.bubblesort
+package cn.lblbc.sort
 
 import android.os.Bundle
 import android.view.View
