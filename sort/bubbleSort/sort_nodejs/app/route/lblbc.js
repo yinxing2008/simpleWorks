@@ -6,8 +6,6 @@
  */
 const Router = require('koa-router');
 
-const { Resolve } = require('@lib/helper');
-
 const router = new Router({
   prefix: '/'
 })
