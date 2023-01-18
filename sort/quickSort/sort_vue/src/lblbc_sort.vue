@@ -33,8 +33,8 @@ export default {
     },
     sort() {
       let array = this.array
-      
-      this.array = this.sortMe(array)
+
+      this.array = this.quickSort(array)
       this.arrayStr = this.convertToStr(array)
     },
     sortMe(array) {
@@ -51,7 +51,30 @@ export default {
           right.push(array[i])
         }
       }
-      return this.sortMe(left).concat(current, this.quickSort(right))
+      return this.sortMe(left).concat(current, this.sortMe(right))
+    },
+    quickSort(arr) {
+      if (arr.length <= 1) {
+        return arr
+      }
+
+      var pivotIndex = Math.floor(arr.length / 2)
+
+      var pivot = arr.splice(pivotIndex, 1)[0]
+
+      var left = []
+
+      var right = []
+
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i] < pivot) {
+          left.push(arr[i])
+        } else {
+          right.push(arr[i])
+        }
+      }
+
+      return this.quickSort(left).concat([pivot], this.quickSort(right))
     },
     convertToStr(array) {
       var result = ''
@@ -72,7 +95,7 @@ export default {
   align-items: center;
   margin-top: 50px;
 }
-.array{
+.array {
   font-size: 40px;
 }
 .btn-row {
