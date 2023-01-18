@@ -16,6 +16,10 @@ public class Lblbc {
         printArray(array);
 
     }
+    
+    private static void sort(int[] array) {
+        sortMe(array, 0, array.length - 1);
+    }
 
     public static void sortMe(int[] array, int low, int high) {
         if (low >= high) {
@@ -46,10 +50,6 @@ public class Lblbc {
         if (r < high) {
             sortMe(array, r + 1, high);
         }
-    }
-
-    private static void sort(int[] array) {
-        sortMe(array, 0, array.length - 1);
     }
 
     private static void printArray(int[] array) {
