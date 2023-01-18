@@ -3,21 +3,23 @@
 ![](https://img-blog.csdnimg.cn/0f4bbd4151df49a480693feacc0a0edf.png)
 ![](https://img-blog.csdnimg.cn/a9c8b44b3a0f4ce7b0facb00c07bd727.png)
 # 1. 安卓Java版
+开发工具：[下载Android Studio](https://cxyxy.blog.csdn.net/article/details/107098873)
 ```java
 private void sort(int[] array) {
-        for (int i = 0; i < array.length - 1; i++) {
+    for (int i = 0; i < array.length - 1; i++) {
         for (int j = 0; j < array.length - 1 - i; j++) {
-        if (array[j] > array[j + 1]) {
-        int tmp = array[j + 1];
-        array[j + 1] = array[j];
-        array[j] = tmp;
+            if (array[j] > array[j + 1]) {
+                int tmp = array[j + 1];
+                array[j + 1] = array[j];
+                array[j] = tmp;
+            }
         }
-        }
-        }
-        }
+    }
+}
 ```
 ![](https://img-blog.csdnimg.cn/8933c64289ad449aba669b79b201d793.png)
 # 2. 安卓Kotlin版
+开发工具：[下载Android Studio](https://cxyxy.blog.csdn.net/article/details/107098873)
 ```kotlin
 private fun sort(array: IntArray) {
     for (i in 0 until array.size - 1) {
@@ -33,6 +35,7 @@ private fun sort(array: IntArray) {
 ```
 ![](https://img-blog.csdnimg.cn/7318e42bbfc846ecbe091b49ac8af54a.png)
 # 3. NodeJS
+开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
 ```js
 function sort() {
   let array = [2, 1, 5, 4, 3]
@@ -50,6 +53,7 @@ function sort() {
 ```
 ![](https://img-blog.csdnimg.cn/77e20daedf8b4101aa479bb82ac4389c.png)
 # 4. Php
+开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
 ```php
 public function sort()
 {
@@ -68,6 +72,7 @@ public function sort()
 ```
 ![](https://img-blog.csdnimg.cn/5379e82b4783477584934bec16d9fe12.png)
 # 5. Python
+开发工具：[下载PyCharm](https://cxyxy.blog.csdn.net/article/details/128722649)
 ```python
 array = [2, 1, 5, 4, 3]
 def sort():
@@ -81,6 +86,7 @@ def sort():
 ![](https://img-blog.csdnimg.cn/05cc456c70744eda834559430b2406b3.png)
 
 # 6. Swift(SwiftUI版)
+开发工具：XCode(mac电脑自带)
 ```swift
 var array = [2, 1, 5, 4, 3]
 func sort() {
@@ -98,6 +104,7 @@ func sort() {
 ![](https://img-blog.csdnimg.cn/215afce0276848bca3da798274928148.png)
 
 # 7. uni-app
+开发工具：[下载HBuilderX](https://cxyxy.blog.csdn.net/article/details/128722661)
 ```js
 sort() {
   let array = [2, 1, 5, 4, 3]
@@ -115,6 +122,7 @@ sort() {
 ![](https://img-blog.csdnimg.cn/e6669cde0e73441581d4f230d3803d12.png)
 
 # 8. vue
+开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
 ```js
 sort() {
   let array = [2, 1, 5, 4, 3]
@@ -132,6 +140,7 @@ sort() {
 ![](https://img-blog.csdnimg.cn/346179da77a14c0faa891c6f8f6bd38e.png)
 
 # 9. 微信小程序
+开发工具：[下载微信开发者工具](https://cxyxy.blog.csdn.net/article/details/128732108)
 ```js
 sort() {
   let array = [2, 1, 5, 4, 3]
@@ -149,12 +158,27 @@ sort() {
 ![](https://img-blog.csdnimg.cn/3259e905924b4b9f95e4ded0a54efa05.png)
 
 # 10. 鸿蒙(ArkTS)
+开发工具：[下载DevEco Studio]()
+```js
+sort() {
+  let array = this.array
+  for (let i = 0; i < array.length - 1; i++) {
+    for (let j = 0; j < array.length - 1 - i; j++) {
+      if (array[j] > array[j + 1]) {
+        let tmp = array[j + 1]
+        array[j + 1] = array[j]
+        array[j] = tmp
+      }
+    }
+  }
+  this.array = array
+}
 ```
-
-```
+![](https://img-blog.csdnimg.cn/7185b139a03d4098bbb8eef7ab402178.png)
 
 
 # 11. Go语言
+开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
 ```go
 var array = []int{2, 1, 5, 4, 3}
 
@@ -172,23 +196,25 @@ func sort() {
 ```
 ![](https://img-blog.csdnimg.cn/41a05ad07edf4effb977fcd317ecd9b8.png)
 # 12. Java
+开发工具：[下载IntelliJ IDEA](https://cxyxy.blog.csdn.net/article/details/128722658)
 ```java
 private static void sort(int[] array) {
-        for (int i = 0; i < array.length - 1; i++) {
+    for (int i = 0; i < array.length - 1; i++) {
         for (int j = 0; j < array.length - 1 - i; j++) {
-        if (array[j] > array[j + 1]) {
-        int tmp = array[j + 1];
-        array[j + 1] = array[j];
-        array[j] = tmp;
+            if (array[j] > array[j + 1]) {
+                int tmp = array[j + 1];
+                array[j + 1] = array[j];
+                array[j] = tmp;
+            }
         }
-        }
-        }
-        }
+    }
+}
 
 ```
 ![](https://img-blog.csdnimg.cn/e22f6734c8554077bab6467ddee75d97.png)
 
 # 13. Kotlin
+开发工具：[下载IntelliJ IDEA](https://cxyxy.blog.csdn.net/article/details/128722658)
 ```kotlin
 private fun sort(array: IntArray) {
     for (i in 0 until array.size - 1) {
@@ -205,6 +231,7 @@ private fun sort(array: IntArray) {
 ![](https://img-blog.csdnimg.cn/ee6d1c9c854b4916b9504102e5e4660d.png)
 
 # 14. Flutter
+开发工具：[下载IntelliJ IDEA](https://cxyxy.blog.csdn.net/article/details/128722658)
 ```dart
 void sort(List<int> list) {
   for (int i = 0; i < list.length - 1; i++) {
@@ -221,6 +248,7 @@ void sort(List<int> list) {
 ![](https://img-blog.csdnimg.cn/9b88565c8e6346d8941a06a4262d3900.png)
 
 # 15. C语言
+开发工具：[下载Visual Studio](https://cxyxy.blog.csdn.net/article/details/128722639)
 ```c
 void sort(int* array, int count)
 {
@@ -241,6 +269,7 @@ void sort(int* array, int count)
 ![](https://img-blog.csdnimg.cn/2ae2cc049add4d4ca456b666c3fddfd2.png)
 
 # 16. C++
+开发工具：[下载Visual Studio](https://cxyxy.blog.csdn.net/article/details/128722639)
 ```cpp
 void sort(int* array, int count)
 {
@@ -261,6 +290,7 @@ void sort(int* array, int count)
 ![](https://img-blog.csdnimg.cn/a41a6308765c4eab85cde800a8fa62b5.png)
 
 # 17. C#
+开发工具：[下载Visual Studio](https://cxyxy.blog.csdn.net/article/details/128722639)
 ```csharp
 private void Sort(int[] array)
 {
