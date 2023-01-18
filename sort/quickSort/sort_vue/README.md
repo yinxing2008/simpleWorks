@@ -319,7 +319,7 @@ private void Sort(int[] array)
 ## 3. 打包发布
 `npm run build`
 ## 4. 浏览
-http://localhost:3000/sort
+http://localhost:3000/
 
 # 关于
 厦门大学计算机专业|华为八年高级工程师   

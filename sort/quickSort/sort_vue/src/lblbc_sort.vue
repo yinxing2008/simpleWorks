@@ -33,17 +33,25 @@ export default {
     },
     sort() {
       let array = this.array
-      for (let i = 0; i < array.length - 1; i++) {
-        for (let j = 0; j < array.length - 1 - i; j++) {
-          if (array[j] > array[j + 1]) {
-            let tmp = array[j + 1]
-            array[j + 1] = array[j]
-            array[j] = tmp
-          }
+      
+      this.array = this.sortMe(array)
+      this.arrayStr = this.convertToStr(array)
+    },
+    sortMe(array) {
+      if (array.length <= 1) {
+        return array
+      }
+      const left = []
+      const right = []
+      const current = array.splice(0, 1)
+      for (let i = 0; i < array.length; i++) {
+        if (array[i] < current) {
+          left.push(array[i])
+        } else {
+          right.push(array[i])
         }
       }
-      this.array = array
-      this.arrayStr = this.convertToStr(array)
+      return this.sortMe(left).concat(current, this.quickSort(right))
     },
     convertToStr(array) {
       var result = ''

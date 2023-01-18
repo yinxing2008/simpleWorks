@@ -16,7 +16,7 @@ public class Lblbc {
         printArray(array);
 
     }
-    
+
     private static void sort(int[] array) {
         sortMe(array, 0, array.length - 1);
     }
