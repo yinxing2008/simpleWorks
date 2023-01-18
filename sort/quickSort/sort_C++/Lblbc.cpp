@@ -33,20 +33,20 @@ int partition(int* array, int low, int high)
 
 	return low;
 }
-void quickSort(int* array, int low, int high)
+void sortMe(int* array, int low, int high)
 {
 	int pivot_index;
 	if (low < high)
 	{
 		pivot_index = partition(array, low, high);
-		quickSort(array, low, pivot_index - 1);
-		quickSort(array, pivot_index + 1, high);
+		sortMe(array, low, pivot_index - 1);
+		sortMe(array, pivot_index + 1, high);
 	}
 }
 
 void sort(int* array, int count)
 {
-	quickSort(array, 0, count - 1);
+	sortMe(array, 0, count - 1);
 }
 
 int main()
