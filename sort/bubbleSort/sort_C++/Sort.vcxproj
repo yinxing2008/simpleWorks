@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{877d7f17-578c-46d1-958b-a76b4377d1de}</ProjectGuid>
-    <RootNamespace>BubbleSort</RootNamespace>
+    <ProjectGuid>{a23152d7-bc84-4958-96c2-ec2faea5c42b}</ProjectGuid>
+    <RootNamespace>Sort</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
