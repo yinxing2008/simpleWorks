@@ -25,6 +25,8 @@ Visual Studio Code
 npm install
 ## 2.运行
 npm run dev
+## 3.浏览器访问
+http://localhost:8080/sort
 # 关于
 厦门大学计算机专业|华为八年高级工程师   
 专注《零基础学编程系列》  http://lblbc.cn/blog  
