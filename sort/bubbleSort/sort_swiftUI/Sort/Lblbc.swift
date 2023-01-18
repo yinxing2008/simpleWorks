@@ -7,7 +7,7 @@ import SwiftUI
 
 var array = [2, 1, 5, 4, 3]
 
-struct ContentView: View {
+struct Lblbc: View {
     @State var arrayStr = ""
     var body: some View {
         VStack {
@@ -62,6 +62,6 @@ func convertToStr()-> String {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Lblbc()
     }
 }
