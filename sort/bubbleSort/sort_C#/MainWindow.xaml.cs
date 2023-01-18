@@ -7,7 +7,7 @@
 using System.Text;
 using System.Windows;
 
-namespace BubbleSort
+namespace Sort
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
@@ -58,7 +58,7 @@ namespace BubbleSort
 
             for (int i = 0; i < array.Length; i++)
             {
-                sb.Append(array[i]+ " ");
+                sb.Append(array[i] + " ");
             }
             label.Content = sb.ToString();
         }
