@@ -5,16 +5,16 @@
 # 1. 安卓Java版
 ```java
 private void sort(int[] array) {
-    for (int i = 0; i < array.length - 1; i++) {
+        for (int i = 0; i < array.length - 1; i++) {
         for (int j = 0; j < array.length - 1 - i; j++) {
-            if (array[j] > array[j + 1]) {
-                int tmp = array[j + 1];
-                array[j + 1] = array[j];
-                array[j] = tmp;
-            }
+        if (array[j] > array[j + 1]) {
+        int tmp = array[j + 1];
+        array[j + 1] = array[j];
+        array[j] = tmp;
         }
-    }
-}
+        }
+        }
+        }
 ```
 ![](https://img-blog.csdnimg.cn/8933c64289ad449aba669b79b201d793.png)
 # 2. 安卓Kotlin版
@@ -174,16 +174,16 @@ func sort() {
 # 12. Java
 ```java
 private static void sort(int[] array) {
-    for (int i = 0; i < array.length - 1; i++) {
+        for (int i = 0; i < array.length - 1; i++) {
         for (int j = 0; j < array.length - 1 - i; j++) {
-            if (array[j] > array[j + 1]) {
-                int tmp = array[j + 1];
-                array[j + 1] = array[j];
-                array[j] = tmp;
-            }
+        if (array[j] > array[j + 1]) {
+        int tmp = array[j + 1];
+        array[j + 1] = array[j];
+        array[j] = tmp;
         }
-    }
-}
+        }
+        }
+        }
 
 ```
 ![](https://img-blog.csdnimg.cn/e22f6734c8554077bab6467ddee75d97.png)
@@ -281,14 +281,8 @@ private void Sort(int[] array)
 ```
 ![](https://img-blog.csdnimg.cn/665bda9b45b349f9923dae18657620a9.png)
 
-# 快速上手
-```commandline
-python3 lblbc.py
-```
-
 # 关于
 厦门大学计算机专业|华为八年高级工程师   
 专注《零基础学编程系列》  http://lblbc.cn/blog  
 包含：Java | 安卓 | 前端 | Flutter | iOS | 小程序 | 鸿蒙  
 公众号：蓝不蓝编程
-
