@@ -4,13 +4,12 @@
  * 包含：Java | 安卓 | 前端 | Flutter | iOS | 小程序 | 鸿蒙
  * 公众号：蓝不蓝编程
  */
+
 fun main() {
     val array = intArrayOf(2, 1, 5, 4, 3)
     println("排序前")
     printArray(array)
-
     sort(array)
-
     println("排序后")
     printArray(array)
 }
