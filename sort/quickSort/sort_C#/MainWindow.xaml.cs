@@ -36,20 +36,43 @@ namespace Sort
             array = new int[] { 2, 1, 5, 4, 3 };
         }
 
-        private void Sort(int[] array)
+        public static void Sort(int[] array)
         {
-            for (int i = 0; i < array.Length - 1; i++)
+            SortMe(array, 0, array.Length - 1);
+        }
+        static void SortMe(int[] array, int low, int high)
+        {
+            if (low >= high)
             {
-                for (int j = 0; j < array.Length - 1 - i; j++)
+                return;
+            }
+            int index = array[low];
+            int i = low;
+            int j = high;
+            while (i < j)
+            {
+                while (i < j && array[j] >= index)
                 {
-                    if (array[j] > array[j + 1])
-                    {
-                        int tmp = array[j + 1];
-                        array[j + 1] = array[j];
-                        array[j] = tmp;
-                    }
+                    j--;
+                }
+                if (i < j)
+                {
+                    array[i] = array[j];
+                    i++;
+                }
+                while (i < j && array[i] < index)
+                {
+                    i++;
+                }
+                if (i < j)
+                {
+                    array[j] = array[i];
+                    j--;
                 }
             }
+            array[i] = index;
+            SortMe(array, low, i - 1);
+            SortMe(array, i + 1, high);
         }
 
         private void ShowArray(int[] array)
