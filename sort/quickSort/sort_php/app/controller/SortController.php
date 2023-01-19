@@ -11,8 +11,7 @@ use Exception;
 use think\facade\Request;
 
 class SortController {
-    public
-    function sort() {
+    public function sort() {
         $array = [2, 1, 5, 4, 3];
         $result = $this->sortMe($array);
         return var_dump($result);
