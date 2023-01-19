@@ -44,17 +44,37 @@ struct Lblbc {
   }
 
   sort() {
-    let array = this.array
-    for (let i = 0; i < array.length - 1; i++) {
-      for (let j = 0; j < array.length - 1 - i; j++) {
-        if (array[j] > array[j + 1]) {
-          let tmp = array[j + 1]
-          array[j + 1] = array[j]
-          array[j] = tmp
-        }
+    let array = this.array;
+    this.sortMe(array, 0, array.length - 1);
+    this.array = array
+  }
+
+  sortMe(array: number[], low: number, high: number) {
+    if (low >= high) {
+      return;
+    }
+    var index = array[low];
+    var i = low;
+    var j = high;
+    while (i < j) {
+      while (i < j && array[j] >= index) {
+        j--;
+      }
+      if (i < j) {
+        array[i] = array[j];
+        i++;
+      }
+      while (i < j && array[i] < index) {
+        i++;
+      }
+      if (i < j) {
+        array[j] = array[i];
+        j--;
       }
     }
-    this.array = array
+    array[i] = index;
+    this.sortMe(array, low, i - 1);
+    this.sortMe(array, i + 1, high);
   }
 
   convertToStr(array) {
