@@ -14,38 +14,48 @@ router.get('sort', async (ctx) => {
   ctx.body = sort()
 })
 
+array = [2, 1, 5, 4, 3]
+
 function sort() {
-  var array = [2, 1, 5, 4, 3]
-  array = sortMe(array, 0, array.length - 1);
+  sortMe(0, array.length - 1);
   return convertToStr(array);
 }
 
-function sortMe(array, low, high) {
-  if (low >= high) {
-    return;
+function sortMe(slow, fast) {
+  let base = array[slow];
+  array[slow] = 0;
+  let left = slow;
+  let right = fast;
+  while (left < right) {
+
+    if (array[left] === 0) {
+      if (array[right] < base) {
+        array[left] = array[right];
+        array[right] = 0;
+        left = left + 1;
+      }
+      else {
+        right = right - 1;
+      }
+    } else if (array[right] === 0) {
+      if (array[left] >= base) {
+        array[right] = array[left];
+        array[left] = 0;
+        right = right - 1;
+      }
+      else {
+        left = left + 1;
+      }
+    }
   }
-  var index = array[low];
-  var i = low;
-  var j = high;
-  while (i < j) {
-    while (i < j && array[j] >= index) {
-      j--;
-    }
-    if (i < j) {
-      array[i] = array[j];
-      i++;
-    }
-    while (i < j && array[i] < index) {
-      i++;
-    }
-    if (i < j) {
-      array[j] = array[i];
-      j--;
-    }
+  array[left] = base;
+  if ((left - 1) - slow > 0) {
+    sortMe(slow, left - 1);
   }
-  array[i] = index;
-  this.sortMe(array, low, i - 1);
-  this.sortMe(array, i + 1, high);
+  if (fast - (right + 1) > 0) {
+    sortMe(right + 1, fast);
+  }
+  return
 }
 
 function convertToStr(array) {
