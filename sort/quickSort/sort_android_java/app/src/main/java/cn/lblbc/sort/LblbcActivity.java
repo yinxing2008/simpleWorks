@@ -35,15 +35,38 @@ public class LblbcActivity extends AppCompatActivity {
         array = new int[]{2, 1, 5, 4, 3};
     }
 
-    private void sort(int[] array) {
-        for (int i = 0; i < array.length - 1; i++) {
-            for (int j = 0; j < array.length - 1 - i; j++) {
-                if (array[j] > array[j + 1]) {
-                    int tmp = array[j + 1];
-                    array[j + 1] = array[j];
-                    array[j] = tmp;
-                }
+    private static void sort(int[] array) {
+        sortMe(array, 0, array.length - 1);
+    }
+
+    public static void sortMe(int[] array, int low, int high) {
+        if (low >= high) {
+            return;
+        }
+        int pivot = array[low];
+        int l = low;
+        int r = high;
+        int tmp;
+        while (l < r) {
+            while (l < r && array[r] >= pivot) {
+                r--;
             }
+            while (l < r && array[l] <= pivot) {
+                l++;
+            }
+            if (l < r) {
+                tmp = array[l];
+                array[l] = array[r];
+                array[r] = tmp;
+            }
+        }
+        array[low] = array[l];
+        array[l] = pivot;
+        if (low < l) {
+            sortMe(array, low, l - 1);
+        }
+        if (r < high) {
+            sortMe(array, r + 1, high);
         }
     }
 
