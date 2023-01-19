@@ -1,42 +1,53 @@
-/*
-  厦门大学计算机专业 | 前华为工程师
-  专注《零基础学编程系列》  http://lblbc.cn/blog
-  包含：Java | 安卓 | 前端 | Flutter | iOS | 小程序 | 鸿蒙
-  公众号：蓝不蓝编程
-*/
-
 package main
 
 import (
 	"fmt"
 )
 
-var array = []int{2, 1, 5, 4, 3}
-
-func sort() {
-	for i := 0; i < len(array)-1; i++ {
-		for j := 0; j < len(array)-1-i; j++ {
-			if array[j] > array[j+1] {
-				tmp := array[j+1]
-				array[j+1] = array[j]
-				array[j] = tmp
-			}
+func sort(left int, right int, array *[5]int) {
+	l := left
+	r := right
+	pivot := array[(left+right)/2]
+	tmp := 0
+	for l < r {
+		for array[l] < pivot {
+			l++
+		}
+		for array[r] > pivot {
+			r--
+		}
+		if l >= r {
+			break
+		}
+		tmp = array[l]
+		array[l] = array[r]
+		array[r] = tmp
+		if array[l] == pivot {
+			r--
+		}
+		if array[r] == pivot {
+			l++
 		}
 	}
-}
-
-func printArray() {
-	for _, value := range array {
-		fmt.Printf("%d  ", value)
+	if l == r {
+		l++
+		r--
 	}
-	fmt.Println()
+	if left < r {
+		sort(left, r, array)
+	}
+	if right > l {
+		sort(l, right, array)
+	}
 }
+
 func main() {
-	fmt.Println("排序前")
-	printArray()
+	array := [5]int{2, 1, 5, 4, 3}
+	fmt.Println("排序前:")
+	fmt.Println(array)
 
-	sort()
+	sort(0, len(array)-1, &array)
 
-	fmt.Println("排序后")
-	printArray()
+	fmt.Println("排序后:")
+	fmt.Println(array)
 }
