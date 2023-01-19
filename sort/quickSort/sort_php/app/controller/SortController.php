@@ -10,21 +10,31 @@ namespace app\controller;
 use Exception;
 use think\facade\Request;
 
-
-class SortController
-{
-    public function sort()
-    {
+class SortController {
+    public
+    function sort() {
         $array = [2, 1, 5, 4, 3];
-        for ($i = 0; $i < count($array) -1; $i++) {
-            for ($j = 0; $j < count($array) -1 -$i; $j++) {
-                if ($array[$j] > $array[$j + 1]) {
-                    $tmp = $array[$j];
-                    $array[$j] = $array[$j + 1];
-                   $array[$j + 1] = $tmp;
-               }
-           }
-       }
-       return var_dump($array);
+        $result = $this->sortMe($array);
+        return var_dump($result);
+    }
+
+    public function sortMe($arr) {
+        $length = count($arr);
+        if (!is_array($arr) || $length <= 1) {
+            return $arr;
+        }
+        $baseValue = $arr[0];
+        $leftArr = array();
+        $rightArr = array();
+        for ($i = 1; $i < $length; $i++) {
+            if ($arr[$i] < $baseValue) {
+                $leftArr[] = $arr[$i];
+            } else {
+                $rightArr[] = $arr[$i];
+            }
+        }
+        $leftArr = $this->sortMe($leftArr);
+        $rightArr = $this->sortMe($rightArr);
+        return array_merge($leftArr, array($baseValue), $rightArr);
     }
 }
