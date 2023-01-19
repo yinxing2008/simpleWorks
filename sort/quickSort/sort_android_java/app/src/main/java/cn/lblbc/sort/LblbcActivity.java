@@ -39,7 +39,7 @@ public class LblbcActivity extends AppCompatActivity {
         sortMe(array, 0, array.length - 1);
     }
 
-    public static void sortMe(int[] array, int low, int high) {
+    private static void sortMe(int[] array, int low, int high) {
         if (low >= high) {
             return;
         }
