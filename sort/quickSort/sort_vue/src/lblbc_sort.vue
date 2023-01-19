@@ -32,57 +32,44 @@ export default {
       this.arrayStr = this.convertToStr(array)
     },
     sort() {
-      let array = this.array
-
-      this.array = this.quickSort(array)
-      this.arrayStr = this.convertToStr(array)
+      let array = this.array;
+      this.array = this.sortMe(array, 0, array.length - 1);
+      this.arrayStr = this.convertToStr(array);
     },
-    sortMe(array) {
-      if (array.length <= 1) {
-        return array
+    sortMe(array: number[], low: number, high: number) {
+      if (low >= high) {
+        return;
       }
-      const left = []
-      const right = []
-      const current = array.splice(0, 1)
-      for (let i = 0; i < array.length; i++) {
-        if (array[i] < current) {
-          left.push(array[i])
-        } else {
-          right.push(array[i])
+      var index = array[low];
+      var i = low;
+      var j = high;
+      while (i < j) {
+        while (i < j && array[j] >= index) {
+          j--;
+        }
+        if (i < j) {
+          array[i] = array[j];
+          i++;
+        }
+        while (i < j && array[i] < index) {
+          i++;
+        }
+        if (i < j) {
+          array[j] = array[i];
+          j--;
         }
       }
-      return this.sortMe(left).concat(current, this.sortMe(right))
+      array[i] = index;
+      this.sortMe(array, low, i - 1);
+      this.sortMe(array, i + 1, high);
     },
-    quickSort(arr) {
-      if (arr.length <= 1) {
-        return arr
-      }
-
-      var pivotIndex = Math.floor(arr.length / 2)
-
-      var pivot = arr.splice(pivotIndex, 1)[0]
-
-      var left = []
-
-      var right = []
-
-      for (var i = 0; i < arr.length; i++) {
-        if (arr[i] < pivot) {
-          left.push(arr[i])
-        } else {
-          right.push(arr[i])
-        }
-      }
-
-      return this.quickSort(left).concat([pivot], this.quickSort(right))
-    },
-    convertToStr(array) {
-      var result = ''
+    convertToStr(array: number[]) {
+      var result = "";
       for (let i = 0; i < array.length; i++) {
-        result += array[i] + ' '
+        result += array[i] + " ";
       }
-      return result
-    }
+      return result;
+    },
   }
 }
 </script>
