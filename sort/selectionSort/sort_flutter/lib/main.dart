@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      list = sort(list);
+                      sort(list);
                       text = convertToStr(list);
                     });
                   },
@@ -94,22 +94,20 @@ void shuffle(List<int> list) {
   list.shuffle();
 }
 
-List<int> sort(List<int> list) {
-  if (list.length < 2) {
-    return list;
-  } else {
-    var pivot = list[0];
-    var less = <int>[];
-    var greater = <int>[];
-    list.removeAt(0);
-    for (var i in list) {
-      if (i <= pivot) {
-        less.add(i);
-      } else {
-        greater.add(i);
+sort(List<int> list) {
+  if (list.isEmpty) {
+    return [];
+  }
+  for (var end = list.length - 1; end > 0; end--) {
+    int maxIndex = 0;
+    for (var begin = 1; begin <= end; begin++) {
+      if (list[maxIndex] <= list[begin]) {
+        maxIndex = begin;
       }
     }
-    return sort(less) + [pivot] + sort(greater);
+    int temp = list[maxIndex];
+    list[maxIndex] = list[end];
+    list[end] = temp;
   }
 }
 
