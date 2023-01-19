@@ -35,14 +35,37 @@ class LblbcActivity : AppCompatActivity() {
     }
 
     private fun sort(array: IntArray) {
-        for (i in 0 until array.size - 1) {
-            for (j in 0 until array.size - 1 - i) {
-                if (array[j] > array[j + 1]) {
-                    val tmp = array[j + 1]
-                    array[j + 1] = array[j]
-                    array[j] = tmp
-                }
+        sortMe(array, 0, array.size - 1)
+    }
+
+    private fun sortMe(array: IntArray, low: Int, high: Int) {
+        if (low >= high) {
+            return
+        }
+        val pivot = array[low]
+        var l = low
+        var r = high
+        var tmp: Int
+        while (l < r) {
+            while (l < r && array[r] >= pivot) {
+                r--
             }
+            while (l < r && array[l] <= pivot) {
+                l++
+            }
+            if (l < r) {
+                tmp = array[l]
+                array[l] = array[r]
+                array[r] = tmp
+            }
+        }
+        array[low] = array[l]
+        array[l] = pivot
+        if (low < l) {
+            sortMe(array, low, l - 1)
+        }
+        if (r < high) {
+            sortMe(array, r + 1, high)
         }
     }
 
