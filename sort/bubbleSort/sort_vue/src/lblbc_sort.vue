@@ -45,7 +45,7 @@ export default {
       this.array = array
       this.arrayStr = this.convertToStr(array)
     },
-    convertToStr(array) {
+    convertToStr(array: number[]) {
       var result = ''
       for (let i = 0; i < array.length; i++) {
         result += array[i] + ' '
@@ -64,7 +64,7 @@ export default {
   align-items: center;
   margin-top: 50px;
 }
-.array{
+.array {
   font-size: 40px;
 }
 .btn-row {
