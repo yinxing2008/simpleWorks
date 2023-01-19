@@ -15,40 +15,21 @@ fun main() {
 }
 
 private fun sort(array: IntArray) {
-    sortMe(array, 0, array.size - 1)
-}
-
-fun sortMe(array: IntArray, low: Int, high: Int) {
-    if (low >= high) {
-        return
-    }
-    val pivot = array[low]
-    var l = low
-    var r = high
-    var tmp: Int
-    while (l < r) {
-        while (l < r && array[r] >= pivot) {
-            r--
+    for (i in 0 until array.size - 1) {
+        var minIndex = i
+        var min = array[i]
+        for (j in i + 1 until array.size) {
+            if (min > array[j]) {
+                min = array[j]
+                minIndex = j
+            }
         }
-        while (l < r && array[l] <= pivot) {
-            l++
+        if (minIndex != i) {
+            array[minIndex] = array[i]
+            array[i] = min
         }
-        if (l < r) {
-            tmp = array[l]
-            array[l] = array[r]
-            array[r] = tmp
-        }
-    }
-    array[low] = array[l]
-    array[l] = pivot
-    if (low < l) {
-        sortMe(array, low, l - 1)
-    }
-    if (r < high) {
-        sortMe(array, r + 1, high)
     }
 }
-
 private fun printArray(array: IntArray) {
     for (i in array.indices) {
         print(array[i].toString() + " ")
