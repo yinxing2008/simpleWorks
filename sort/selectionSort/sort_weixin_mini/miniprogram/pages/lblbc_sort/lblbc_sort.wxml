@@ -1,0 +1,7 @@
+<view class="wrapper">
+  <view>{{arrayStr}}</view>
+  <view class="btn-row">
+    <view class="btn" bindtap="shuffle">打乱</view>
+    <view class="btn btn-right" bindtap="sort">排序</view>
+  </view>
+</view>
