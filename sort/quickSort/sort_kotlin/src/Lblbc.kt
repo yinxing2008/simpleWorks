@@ -49,7 +49,6 @@ fun sortMe(array: IntArray, low: Int, high: Int) {
     }
 }
 
-
 private fun printArray(array: IntArray) {
     for (i in array.indices) {
         print(array[i].toString() + " ")
