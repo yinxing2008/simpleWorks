@@ -13,37 +13,44 @@ void printArray(int* array, int count)
 	}
 }
 
-int partition(int* array, int low, int high)
-{
-	int pivot_value = array[low];
-	while (low < high) {
-		while (low < high && array[high] >= pivot_value) {
-			--high;
-		}
-		array[low] = array[high];
-		while (low < high && array[low] <= pivot_value) {
-			++low;
-		}
-		array[high] = array[low];
-	}
-	array[low] = pivot_value;
-
-	return low;
-}
 void sortMe(int* array, int low, int high)
 {
-	int pivot_index;
-	if (low < high)
-	{
-		pivot_index = partition(array, low, high);
-		sortMe(array, low, pivot_index - 1);
-		sortMe(array, pivot_index + 1, high);
-	}
+    if (low >= high)
+    {
+        return;
+    }
+    int index = array[low];
+    int i = low;
+    int j = high;
+    while (i < j)
+    {
+        while (i < j && array[j] >= index)
+        {
+            j--;
+        }
+        if (i < j)
+        {
+            array[i] = array[j];
+            i++;
+        }
+        while (i < j && array[i] < index)
+        {
+            i++;
+        }
+        if (i < j)
+        {
+            array[j] = array[i];
+            j--;
+        }
+    }
+    array[i] = index;
+    sortMe(array, low, i - 1);
+    sortMe(array, i + 1, high);
 }
 
 void sort(int* array, int count)
 {
-	sortMe(array, 0, count - 1);
+    sortMe(array, 0, count - 1);
 }
 
 int main()

@@ -36,11 +36,11 @@ namespace Sort
             array = new int[] { 2, 1, 5, 4, 3 };
         }
 
-        public static void Sort(int[] array)
+        private static void Sort(int[] array)
         {
             SortMe(array, 0, array.Length - 1);
         }
-        static void SortMe(int[] array, int low, int high)
+        private static void SortMe(int[] array, int low, int high)
         {
             if (low >= high)
             {
