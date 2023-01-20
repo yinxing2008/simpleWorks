@@ -41,29 +41,17 @@ func shuffle() {
 }
 
 func sort() {
-    sortMe(array: &array, left: 0, right: array.count - 1)
-}
-
-func sortMe(array: inout [Int], left: Int, right: Int) {
-    if right - left <= 0 {
-        return
-    }
-    
-    var flagIndex = left
-    let flagValue = array[left]
-    
-    for index in stride(from: left + 1, to: right + 1, by: 1) {
-        let value = array[index]
-        if value < flagValue {
-            array[flagIndex] = value
-            flagIndex += 1
-            array[index] = array[flagIndex]
-            array[flagIndex] = flagValue
+    for i in 0..<array.count {
+        var minValueIndex = i
+        for j in (minValueIndex + 1)..<array.count {
+            if array[minValueIndex] > array[j] {
+                minValueIndex = j
+            }
         }
+        let tmp = array[i]
+        array[i] = array[minValueIndex]
+        array[minValueIndex] = tmp
     }
-    
-    sortMe(array: &array, left: left, right: flagIndex - 1)
-    sortMe(array: &array, left: flagIndex + 1, right: right)
 }
 
 
