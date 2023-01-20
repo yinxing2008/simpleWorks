@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-void printArray(int* array, int count)
+void printArray(int *array, int count)
 {
 	for (int i = 0; i < count; i++)
 	{
@@ -14,25 +14,51 @@ void printArray(int* array, int count)
 	}
 }
 
-void sort(int* array, int count)
+void sort(int array[], int count)
 {
-	for (int i = 0; i < count - 1; i++)
+	int max = array[0];
+	int min = array[0];
+	for (int i = 1; i < count; i++)
 	{
-		for (int j = 0; j < count - 1 - i; j++)
+		if (array[i] > max)
 		{
-			if (array[j + 1] < array[j])
-			{
-				int tmp = array[j];
-				array[j] = array[j + 1];
-				array[j + 1] = tmp;
-			}
+			max = array[i];
 		}
+
+		if (array[i] < min)
+		{
+			min = array[i];
+		}
+	}
+
+	int bucketLen = max - min + 1;
+	int bucket[bucketLen];
+	for (int i = 0; i < bucketLen; i++)
+	{
+		bucket[i] = 0;
+	}
+
+	int index = 0;
+	for (int i = 0; i < count; i++)
+	{
+		index = array[i] - min;
+		bucket[index] += 1;
+	}
+
+	int start = 0;
+	for (int i = 0; i < bucketLen; i++)
+	{
+		for (int j = start; j < start + bucket[i]; j++)
+		{
+			array[j] = min + i;
+		}
+		start += bucket[i];
 	}
 }
 
 int main()
 {
-	int array[5] = { 2, 1, 5, 4, 3 };
+	int array[5] = {2, 1, 5, 4, 3};
 	int count = sizeof(array) / sizeof(int);
 	printf("排序前:");
 	printArray(array, count);
@@ -43,4 +69,3 @@ int main()
 	printArray(array, count);
 	return 0;
 }
-
