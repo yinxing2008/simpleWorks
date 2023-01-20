@@ -14,44 +14,26 @@ void printArray(int* array, int count)
     }
 }
 
-
-void adjustHeap(int* array, int i, int length)
+void sort(int* array, int count)
 {
-    int tmp = array[i];
-    for (int j = i * 2 + 1; j < length; j = j * 2 + 1)
+    for (int gap = count / 2; gap > 0; gap /= 2)
     {
-        if (j + 1 < length && array[j] < array[j + 1])
+        for (int i = gap; i < count; i++)
         {
-            j++;
+            int j = i;
+            int tmp = array[j];
+            if (array[j] < array[j - gap])
+            {
+                while (j - gap >= 0 && tmp < array[j - gap])
+                {
+                    array[j] = array[j - gap];
+                    j -= gap;
+                }
+                array[j] = tmp;
+            }
         }
-        if (array[j] > tmp)
-        {
-            array[i] = array[j];
-            i = j;
-        }
-        else
-        {
-            break;
-        }
-    }
-    array[i] = tmp;
-}
-
- void sort(int* array, int count)
-{
-    for (int i = count / 2 - 1; i >= 0; i--)
-    {
-        adjustHeap(array, i, count);
-    }
-    for (int j = count - 1; j > 0; j--)
-    {
-        int temp = array[0];
-        array[0] = array[j];
-        array[j] = temp;
-        adjustHeap(array, 0, j);
     }
 }
-
 
 int main()
 {

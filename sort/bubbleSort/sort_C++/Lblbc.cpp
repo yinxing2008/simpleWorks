@@ -6,6 +6,14 @@
 #include <iostream>
 using namespace std;
 
+void printArray(int* array, int count)
+{
+	for (int i = 0; i < count; i++)
+	{
+		cout << array[i] << " ";
+	}
+}
+
 void sort(int* array, int count)
 {
 	for (int i = 0; i < count - 1; i++)
@@ -26,11 +34,13 @@ int main()
 {
 	int array[5] = { 2, 1, 5, 4, 3 };
 	int count = sizeof(array) / sizeof(int);
+	printf("排序前:");
+	printArray(array, count);
+
 	sort(array, count);
-	for (int i = 0; i < count; i++)
-	{
-		cout << array[i] << " ";
-	}
+
+	printf("排序后:");
+	printArray(array, count);
 	return 0;
 }
 
