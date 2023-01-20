@@ -94,16 +94,33 @@ void shuffle(List<int> list) {
   list.shuffle();
 }
 
-void sort(List<int> list) {
-  for (int i = 0; i < list.length - 1; i++) {
-    for (int j = 0; j < list.length - 1 - i; j++) {
-      if (list[j] > list[j + 1]) {
-        var tmp = list[j + 1];
-        list[j + 1] = list[j];
-        list[j] = tmp;
-      }
+void sort(List<int> array) {
+  var startIndex = (array.length / 2 - 1).toInt();
+  for (int i = startIndex; i >= 0; i--) {
+    adjustHeap(array, i, array.length);
+  }
+  for (int j = array.length - 1; j > 0; j--) {
+    int temp = array[0];
+    array[0] = array[j];
+    array[j] = temp;
+    adjustHeap(array, 0, j);
+  }
+}
+
+void adjustHeap(List<int> array, int startIndex, int length) {
+  int tmp = array[startIndex];
+  for (int j = startIndex * 2 + 1; j < length; j = j * 2 + 1) {
+    if (j + 1 < length && array[j] < array[j + 1]) {
+      j++;
+    }
+    if (array[j] > tmp) {
+      array[startIndex] = array[j];
+      startIndex = j;
+    } else {
+      break;
     }
   }
+  array[startIndex] = tmp;
 }
 
 convertToStr(List<int> list) {
