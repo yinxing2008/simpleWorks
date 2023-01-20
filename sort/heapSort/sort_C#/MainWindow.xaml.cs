@@ -48,18 +48,18 @@ namespace Sort
             }
         }
 
-        private static void AdjustHeap(int[] arr, int i, int length)
+        private static void AdjustHeap(int[] array, int i, int length)
         {
-            int tmp = arr[i];
+            int tmp = array[i];
             for (int j = i * 2 + 1; j < length; j = j * 2 + 1)
             {
-                if (j + 1 < length && arr[j] < arr[j + 1])
+                if (j + 1 < length && array[j] < array[j + 1])
                 {
                     j++;
                 }
-                if (arr[j] > tmp)
+                if (array[j] > tmp)
                 {
-                    arr[i] = arr[j];
+                    array[i] = array[j];
                     i = j;
                 }
                 else
@@ -67,7 +67,7 @@ namespace Sort
                     break;
                 }
             }
-            arr[i] = tmp;
+            array[i] = tmp;
         }
         private void ShowArray(int[] array)
         {
