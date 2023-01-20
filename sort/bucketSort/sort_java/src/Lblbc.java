@@ -1,0 +1,44 @@
+import java.util.Arrays;
+
+/**
+ * 厦门大学计算机专业 | 前华为工程师
+ * 专注《零基础学编程系列》  http://lblbc.cn/blog
+ * 包含：Java | 安卓 | 前端 | Flutter | iOS | 小程序 | 鸿蒙
+ * 公众号：蓝不蓝编程
+ */
+public class Lblbc {
+    public static void main(String[] args) {
+        int[] array = {2, 1, 5, 4, 3};
+        System.out.println("排序前");
+        printArray(array);
+
+        sort(array);
+
+        System.out.println("排序后");
+        printArray(array);
+
+    }
+
+    private static void sort(int[] array) {
+        int max = array[0];
+        for (int value : array) {
+            if (value > max) {
+                max = value;
+            }
+        }
+        int[] bucketArray = new int[max + 1];
+        for (int value : array) {
+            bucketArray[value]++;
+        }
+        int index = 0;
+        for (int i = 0; i < bucketArray.length; i++) {
+            for (int j = 0; j < bucketArray[i]; j++) {
+                array[index++] = i;
+            }
+        }
+    }
+
+    private static void printArray(int[] array) {
+         System.out.println(Arrays.toString(array));
+    }
+}
