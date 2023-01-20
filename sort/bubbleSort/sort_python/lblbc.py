@@ -15,7 +15,6 @@ def sort():
                 array[j], array[j + 1] = array[j + 1], array[j]
 
 
-
 print("排序前:")
 print(array)
 
