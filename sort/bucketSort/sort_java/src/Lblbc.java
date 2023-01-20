@@ -21,16 +21,12 @@ public class Lblbc {
 
     private static void sort(int[] array) {
         int max = array[0];
-        int min = array[0];
         for (int value : array) {
             if (value > max) {
                 max = value;
             }
-            if (value < min) {
-                min = value;
-            }
         }
-        int[] bucketArray = new int[max - min + 2];
+        int[] bucketArray = new int[max + 1];
         for (int value : array) {
             bucketArray[value]++;
         }
