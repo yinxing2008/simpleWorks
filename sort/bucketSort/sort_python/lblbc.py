@@ -8,22 +8,22 @@ array = [2, 1, 5, 4, 3]
 
 
 def sort():
-    count = len(array)
-    for i in range(count):
-        for j in range(0, count - i - 1):
-            if array[j] > array[j + 1]:
-                array[j], array[j + 1] = array[j + 1], array[j]
-
-
-def printArray():
-    for i in range(len(array)):
-        print("%d" % array[i]),
+    min_num, max_num = min(array), max(array)
+    bucket_num = (max_num - min_num) // 3 + 1
+    buckets = [[] for _ in range(bucket_num)]
+    for num in array:
+        buckets[(num - min_num) // 3].append(num)
+    new_array = list()
+    for i in buckets:
+        for j in sorted(i):
+            new_array.append(j)
+    return new_array
 
 
 print("排序前:")
-printArray()
+print(array)
 
-sort()
+array = sort()
 
 print("排序后:")
-printArray()
+print(array)
