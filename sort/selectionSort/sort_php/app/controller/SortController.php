@@ -12,28 +12,25 @@ class SortController
     public function sort()
     {
         $array = [2, 1, 5, 4, 3];
-        $result = $this->sortMe($array);
-        return var_dump($result);
+        $this->sortMe($array);
+        return var_dump($array);
     }
 
-    public function sortMe($arr)
+    public function sortMe(&$array)
     {
-        $length = count($arr);
-        if (!is_array($arr) || $length <= 1) {
-            return $arr;
-        }
-        $baseValue = $arr[0];
-        $leftArr = array();
-        $rightArr = array();
-        for ($i = 1; $i < $length; $i++) {
-            if ($arr[$i] < $baseValue) {
-                $leftArr[] = $arr[$i];
-            } else {
-                $rightArr[] = $arr[$i];
+        $t = count($array);
+        for ($i = 0; $i < $t - 1; $i++) {
+            $k = $i;
+            for ($j = $i + 1; $j < $t; $j++) {
+                if ($array[$j] < $array[$k]) {
+                    $k = $j;
+                }
+            }
+            if ($k != $i) {
+                $tmp = $array[$i];
+                $array[$i] = $array[$k];
+                $array[$k] = $tmp;
             }
         }
-        $leftArr = $this->sortMe($leftArr);
-        $rightArr = $this->sortMe($rightArr);
-        return array_merge($leftArr, array($baseValue), $rightArr);
     }
 }
