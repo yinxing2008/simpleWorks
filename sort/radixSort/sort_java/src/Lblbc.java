@@ -51,7 +51,6 @@ public class Lblbc {
     }
 
     private static void printArray(int[] array) {
-
         System.out.println(Arrays.toString(array));
     }
 }

@@ -6,6 +6,9 @@
       <excludeFolder url="file://$MODULE_DIR$/selectionSort/sort_flutter/build" />
       <excludeFolder url="file://$MODULE_DIR$/selectionSort/sort_flutter/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/selectionSort/sort_flutter/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/bucketSort/sort_flutter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/bucketSort/sort_flutter/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/bucketSort/sort_flutter/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/bubbleSort/sort_flutter/build" />
       <excludeFolder url="file://$MODULE_DIR$/bubbleSort/sort_flutter/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/bubbleSort/sort_flutter/.pub" />

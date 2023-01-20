@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * 厦门大学计算机专业 | 前华为工程师
  * 专注《零基础学编程系列》  http://lblbc.cn/blog
@@ -35,9 +37,6 @@ public class Lblbc {
     }
 
     private static void printArray(int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            System.out.print(array[i] + " ");
-        }
-        System.out.println();
+         System.out.println(Arrays.toString(array));
     }
 }
