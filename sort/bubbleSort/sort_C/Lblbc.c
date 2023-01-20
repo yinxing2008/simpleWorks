@@ -1,8 +1,17 @@
-/// ÏÃÃÅ´óÑ§¼ÆËã»ú×¨Òµ | Ç°»ªÎª¹¤³ÌÊ¦
-/// ×¨×¢¡¶Áã»ù´¡Ñ§±à³ÌÏµÁĞ¡·  http://lblbc.cn/blog
-/// °üº¬£ºJava | °²×¿ | Ç°¶Ë | Flutter | iOS | Ğ¡³ÌĞò | ºèÃÉ
-/// ¹«ÖÚºÅ£ºÀ¶²»À¶±à³Ì
+/// å¦é—¨å¤§å­¦è®¡ç®—æœºä¸“ä¸š | å‰åä¸ºå·¥ç¨‹å¸ˆ
+/// ä¸“æ³¨ã€Šé›¶åŸºç¡€å­¦ç¼–ç¨‹ç³»åˆ—ã€‹  http://lblbc.cn/blog
+/// åŒ…å«ï¼šJava | å®‰å“ | å‰ç«¯ | Flutter | iOS | å°ç¨‹åº | é¸¿è’™
+/// å…¬ä¼—å·ï¼šè“ä¸è“ç¼–ç¨‹
+
 #include<stdio.h>
+
+void printArray(int* array, int count)
+{
+	for (int i = 0; i < count; i++)
+	{
+		printf("%d ", array[i]);
+	}
+}
 
 void sort(int* array, int count)
 {
@@ -24,10 +33,12 @@ int main()
 {
 	int array[5] = { 2, 1, 5, 4, 3 };
 	int count = sizeof(array) / sizeof(int);
+	printf("æ’åºå‰:");
+	printArray(array, count);
+	
 	sort(array, count);
-	for (int i = 0; i < count; i++)
-	{
-		printf("%d ", array[i]);
-	}
+
+	printf("æ’åºå:");
+	printArray(array, count);
 	return 0;
 }
