@@ -1,0 +1,30 @@
+private static void sort(int[] array) {
+        int[][] bucket = new int[10][array.length];
+        int[] bucketElementCounts = new int[10];
+        int digitOfElement;
+        int max = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (max < String.valueOf(array[i]).length()) {
+                max = String.valueOf(array[i]).length();
+            }
+        }
+
+        int index;
+        for (int i = 0, n = 1; i < max; i++, n *= 10) {
+            for (int j = 0; j < array.length; j++) {
+                digitOfElement = array[j] / n % 10;
+                bucket[digitOfElement][bucketElementCounts[digitOfElement]] = array[j];
+                bucketElementCounts[digitOfElement]++;
+            }
+            index = 0;
+            for (int k = 0; k < bucketElementCounts.length; k++) {
+                if (bucketElementCounts[k] != 0) {
+                    for (int l = 0; l < bucketElementCounts[k]; l++) {
+                        array[index] = bucket[k][l];
+                        index++;
+                    }
+                }
+                bucketElementCounts[k] = 0;
+            }
+        }
+    }
