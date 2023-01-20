@@ -19,12 +19,12 @@ class LblbcActivity : AppCompatActivity() {
         setContentView(R.layout.activity_lblbc)
 
         showArray(array)
-        findViewById<View>(R.id.shuffleButton).setOnClickListener { view: View? ->
+        findViewById<View>(R.id.shuffleButton).setOnClickListener {
             shuffle()
             showArray(array)
         }
 
-        findViewById<View>(R.id.sortButton).setOnClickListener { view: View? ->
+        findViewById<View>(R.id.sortButton).setOnClickListener {
             sort(array)
             showArray(array)
         }
