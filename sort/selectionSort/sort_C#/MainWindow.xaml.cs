@@ -9,9 +9,6 @@ using System.Windows;
 
 namespace Sort
 {
-    /// <summary>
-    /// MainWindow.xaml 的交互逻辑
-    /// </summary>
     public partial class MainWindow : Window
     {
         private int[] array = { 2, 1, 5, 4, 3 };
@@ -38,41 +35,24 @@ namespace Sort
 
         private static void Sort(int[] array)
         {
-            SortMe(array, 0, array.Length - 1);
-        }
-        private static void SortMe(int[] array, int low, int high)
-        {
-            if (low >= high)
+            for (int i = 0; i < array.Length - 1; i++)
             {
-                return;
-            }
-            int index = array[low];
-            int i = low;
-            int j = high;
-            while (i < j)
-            {
-                while (i < j && array[j] >= index)
+                int minIndex = i;
+                int min = array[i];
+                for (int j = i + 1; j < array.Length; j++)
                 {
-                    j--;
+                    if (min > array[j])
+                    {
+                        min = array[j];
+                        minIndex = j;
+                    }
                 }
-                if (i < j)
+                if (minIndex != i)
                 {
-                    array[i] = array[j];
-                    i++;
-                }
-                while (i < j && array[i] < index)
-                {
-                    i++;
-                }
-                if (i < j)
-                {
-                    array[j] = array[i];
-                    j--;
+                    array[minIndex] = array[i];
+                    array[i] = min;
                 }
             }
-            array[i] = index;
-            SortMe(array, low, i - 1);
-            SortMe(array, i + 1, high);
         }
 
         private void ShowArray(int[] array)

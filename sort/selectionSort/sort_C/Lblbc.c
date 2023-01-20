@@ -13,44 +13,26 @@ void printArray(int* array, int count)
 	}
 }
 
-void sortMe(int* array, int low, int high)
-{
-    if (low >= high)
-    {
-        return;
-    }
-    int index = array[low];
-    int i = low;
-    int j = high;
-    while (i < j)
-    {
-        while (i < j && array[j] >= index)
-        {
-            j--;
-        }
-        if (i < j)
-        {
-            array[i] = array[j];
-            i++;
-        }
-        while (i < j && array[i] < index)
-        {
-            i++;
-        }
-        if (i < j)
-        {
-            array[j] = array[i];
-            j--;
-        }
-    }
-    array[i] = index;
-    sortMe(array, low, i - 1);
-    sortMe(array, i + 1, high);
-}
-
 void sort(int* array, int count)
 {
-    sortMe(array, 0, count - 1);
+    for (int i = 0; i < count - 1; i++)
+    {
+        int minIndex = i;
+        int min = array[i];
+        for (int j = i + 1; j < count; j++)
+        {
+            if (min > array[j])
+            {
+                min = array[j];
+                minIndex = j;
+            }
+        }
+        if (minIndex != i)
+        {
+            array[minIndex] = array[i];
+            array[i] = min;
+        }
+    }
 }
 
 int main()
