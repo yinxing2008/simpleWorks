@@ -7,31 +7,27 @@
 array = [2, 1, 5, 4, 3]
 
 
-def sort(array, low, high):
-    if low >= high:
+def sort():
+    length = len(array)
+    if length <= 1:
         return array
-    i = low
-    j = high
-    pivot = array[low]
-    while i < j:
-        while i < j and array[j] > pivot:
-            j -= 1
-        array[i] = array[j]
-        while i < j and array[i] < pivot:
-            i += 1
-        array[j] = array[i]
-    array[j] = pivot
 
-    sort(array, low, j - 1)
-    sort(array, j + 1, high)
+    for i in range(length):
+        min_num_index = i
 
-    return
+        for j in range(i + 1, length):
+            if array[j] < array[min_num_index]:
+                min_num_index = j
+
+        array[min_num_index], array[i] = array[i], array[min_num_index]
+
+    return array
 
 
 print("排序前:")
 print(array)
 
-sort(array, 0, len(array) - 1)
+sort()
 
 print("排序后:")
 print(array)
