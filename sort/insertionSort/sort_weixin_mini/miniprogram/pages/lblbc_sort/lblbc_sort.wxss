@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+.btn-row{
+  margin-top: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0 20px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  color: #f9f6f2;
+  background: #418DF9;
+}
+
+.btn-right {
+  margin-left: 10px;
+}
