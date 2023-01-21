@@ -35,37 +35,36 @@ class LblbcActivity : AppCompatActivity() {
     }
 
     private fun sort(array: IntArray) {
-        val bucket = Array(10) { IntArray(array.size) }
-        val bucketElementCounts = IntArray(10)
-        var digitOfElement: Int
-        var max = 0
+        val max = getMaxValue(array)
+        var exp = 1
+        while (max / exp > 0) {
+            countSort(array, exp)
+            exp *= 10
+        }
+    }
+
+    private fun countSort(array: IntArray, exp: Int) {
+        val tmpArr = IntArray(array.size)
+        val bucketArr = IntArray(10)
+        for (i in array.indices) bucketArr[array[i] / exp % 10]++
+        for (i in 1..9) bucketArr[i] += bucketArr[i - 1]
+        for (i in array.indices.reversed()) {
+            tmpArr[bucketArr[array[i] / exp % 10] - 1] = array[i]
+            bucketArr[array[i] / exp % 10]--
+        }
         for (i in array.indices) {
-            if (max < array[i].toString().length) {
-                max = array[i].toString().length
+            array[i] = tmpArr[i]
+        }
+    }
+
+    private fun getMaxValue(array: IntArray): Int {
+        var max = array[0]
+        for (i in 1 until array.size) {
+            if (array[i] > max) {
+                max = array[i]
             }
         }
-        var index: Int
-        var i = 0
-        var n = 1
-        while (i < max) {
-            for (j in array.indices) {
-                digitOfElement = array[j] / n % 10
-                bucket[digitOfElement][bucketElementCounts[digitOfElement]] = array[j]
-                bucketElementCounts[digitOfElement]++
-            }
-            index = 0
-            for (k in bucketElementCounts.indices) {
-                if (bucketElementCounts[k] != 0) {
-                    for (l in 0 until bucketElementCounts[k]) {
-                        array[index] = bucket[k][l]
-                        index++
-                    }
-                }
-                bucketElementCounts[k] = 0
-            }
-            i++
-            n *= 10
-        }
+        return max
     }
 
     private fun showArray(array: IntArray) {

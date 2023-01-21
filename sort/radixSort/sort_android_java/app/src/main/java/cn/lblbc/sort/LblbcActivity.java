@@ -35,35 +35,41 @@ public class LblbcActivity extends AppCompatActivity {
         array = new int[]{2, 1, 5, 4, 3};
     }
 
-    private void sort(int[] array) {
-        int[][] bucket = new int[10][array.length];
-        int[] bucketElementCounts = new int[10];
-        int digitOfElement;
-        int max = 0;
-        for (int value : array) {
-            if (max < String.valueOf(value).length()) {
-                max = String.valueOf(value).length();
+    private static void sort(int[] array) {
+        int max = getMaxValue(array);
+        for (int exp = 1; max / exp > 0; exp *= 10)
+            countSort(array, exp);
+    }
+
+    private static void countSort(int[] array, int exp) {
+        int[] tmpArr = new int[array.length];
+        int[] bucketArr = new int[10];
+
+        for (int i = 0; i < array.length; i++)
+            bucketArr[(array[i] / exp) % 10]++;
+
+        for (int i = 1; i < 10; i++)
+            bucketArr[i] += bucketArr[i - 1];
+
+        for (int i = array.length - 1; i >= 0; i--) {
+            tmpArr[bucketArr[(array[i] / exp) % 10] - 1] = array[i];
+            bucketArr[(array[i] / exp) % 10]--;
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            array[i] = tmpArr[i];
+        }
+    }
+
+    private static int getMaxValue(int[] array) {
+        int max = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
             }
         }
 
-        int index;
-        for (int i = 0, n = 1; i < max; i++, n *= 10) {
-            for (int value : array) {
-                digitOfElement = value / n % 10;
-                bucket[digitOfElement][bucketElementCounts[digitOfElement]] = value;
-                bucketElementCounts[digitOfElement]++;
-            }
-            index = 0;
-            for (int k = 0; k < bucketElementCounts.length; k++) {
-                if (bucketElementCounts[k] != 0) {
-                    for (int l = 0; l < bucketElementCounts[k]; l++) {
-                        array[index] = bucket[k][l];
-                        index++;
-                    }
-                }
-                bucketElementCounts[k] = 0;
-            }
-        }
+        return max;
     }
 
     private void showArray(int[] array) {
