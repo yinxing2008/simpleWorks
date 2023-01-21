@@ -17,7 +17,7 @@ class SortController
         $this->sortMe($array, $start, $end);
         return var_dump($array);
     }
-    public function sortMe(&$arr, $start, $end)
+    private function sortMe(&$arr, $start, $end)
     {
         if ($start < $end) {
             $mid = floor(($start + $end) / 2);
@@ -27,7 +27,7 @@ class SortController
         }
     }
 
-    public function mergeSort(&$arr, $start, $mid, $end)
+    private function mergeSort(&$arr, $start, $mid, $end)
     {
         $i = $start;
         $j = $mid + 1;
