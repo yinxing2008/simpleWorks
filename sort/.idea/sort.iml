@@ -21,6 +21,15 @@
       <excludeFolder url="file://$MODULE_DIR$/countSort/sort_flutter/build" />
       <excludeFolder url="file://$MODULE_DIR$/countSort/sort_flutter/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/countSort/sort_flutter/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/mergeSort/sort_flutter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/mergeSort/sort_flutter/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/mergeSort/sort_flutter/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/insertionSort/sort_flutter/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/insertionSort/sort_flutter/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/insertionSort/sort_flutter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/shellSort/sort_flutter/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/shellSort/sort_flutter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/shellSort/sort_flutter/.dart_tool" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
