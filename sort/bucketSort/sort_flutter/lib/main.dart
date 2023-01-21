@@ -94,14 +94,23 @@ void shuffle(List<int> list) {
   list.shuffle();
 }
 
-void sort(List<int> list) {
-  for (int i = 0; i < list.length - 1; i++) {
-    for (int j = 0; j < list.length - 1 - i; j++) {
-      if (list[j] > list[j + 1]) {
-        var tmp = list[j + 1];
-        list[j + 1] = list[j];
-        list[j] = tmp;
-      }
+sort(List<int> array) {
+  int max = array[0];
+  for (int i = 0; i < array.length - 1; i++) {
+    if (array[i] > max) {
+      max = array[i];
+    }
+  }
+
+  List<num> bucketArray = List.filled(max + 1, 0);
+  for (int i = 0; i < array.length - 1; i++) {
+    bucketArray[array[i]] += 1;
+  }
+
+  int index = 0;
+  for (int i = 0; i < bucketArray.length; i++) {
+    for (int j = 0; j < bucketArray[i]; j++) {
+      array[index++] = i;
     }
   }
 }
