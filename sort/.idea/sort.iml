@@ -15,6 +15,12 @@
       <excludeFolder url="file://$MODULE_DIR$/quickSort/sort_flutter/build" />
       <excludeFolder url="file://$MODULE_DIR$/quickSort/sort_flutter/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/quickSort/sort_flutter/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/heapSort/sort_flutter/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/heapSort/sort_flutter/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/heapSort/sort_flutter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/countSort/sort_flutter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/countSort/sort_flutter/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/countSort/sort_flutter/.dart_tool" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
