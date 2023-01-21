@@ -1,0 +1,17 @@
+{
+	"pages": [
+		{
+			"path": "pages/lblbc_sort",
+			"style": {
+				"navigationBarTitleText": "冒泡排序 - 蓝不蓝编程"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "蓝不蓝编程",
+		"navigationBarBackgroundColor": "#418DF9",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}
