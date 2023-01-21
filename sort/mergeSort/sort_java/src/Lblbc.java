@@ -32,7 +32,6 @@ public class Lblbc {
             mergeSort(array, mid + 1, last);
             binaryMerge(array, first, mid, last);
         }
-
     }
 
     public static void binaryMerge(int[] array, int first, int mid, int last) {
@@ -41,8 +40,10 @@ public class Lblbc {
         for (index = first; index <= last; index++) {
             tmpArray[index] = array[index];
         }
-
-        for (index = left = first, right = mid + 1; left <= mid && right <= last && index <= last; index++) {
+        index = first;
+        left = first;
+        right = mid + 1;
+        for (; left <= mid && right <= last && index <= last; index++) {
             if (tmpArray[left] <= tmpArray[right]) {
                 array[index] = tmpArray[left++];
             } else {
@@ -54,6 +55,6 @@ public class Lblbc {
     }
 
     private static void printArray(int[] array) {
-         System.out.println(Arrays.toString(array));
+        System.out.println(Arrays.toString(array));
     }
 }
