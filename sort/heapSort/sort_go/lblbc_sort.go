@@ -11,7 +11,7 @@ import "fmt"
 
 var array = []int{2, 1, 5, 4, 3}
 
-func adjustHeap(array []int, currentIndex int, maxLength int) {
+func adjustHeap(currentIndex int, maxLength int) {
 	var noLeafValue = array[currentIndex]
 	for j := 2*currentIndex + 1; j <= maxLength; j = currentIndex*2 + 1 {
 		if j < maxLength && array[j] < array[j+1] {
@@ -26,16 +26,18 @@ func adjustHeap(array []int, currentIndex int, maxLength int) {
 	array[currentIndex] = noLeafValue
 }
 
-func createHeap(array []int, length int) {
+func createHeap(length int) {
 	for i := length / 2; i >= 0; i-- {
-		adjustHeap(array, i, length-1)
+		adjustHeap(i, length-1)
 	}
 }
+
 func sort(array []int) {
 	var length = len(array)
+	createHeap(length)
 	for i := length - 1; i > 0; i-- {
 		array[0], array[i] = array[i], array[0]
-		adjustHeap(array, 0, i-1)
+		adjustHeap(0, i-1)
 	}
 }
 
@@ -47,12 +49,8 @@ func printArray() {
 }
 
 func main() {
-
 	fmt.Println("排序前")
 	printArray()
-	var length = len(array)
-
-	createHeap(array, length)
 
 	sort(array)
 
