@@ -31,28 +31,31 @@ func createHeap(array []int, length int) {
 		adjustHeap(array, i, length-1)
 	}
 }
-func heapSort(array []int, length int) {
+func sort(array []int) {
+	var length = len(array)
 	for i := length - 1; i > 0; i-- {
 		array[0], array[i] = array[i], array[0]
 		adjustHeap(array, 0, i-1)
 	}
 }
-func main() {
 
-	var length = len(array)
-	fmt.Println("建堆之前：")
-	for i := 0; i < length; i++ {
-		fmt.Printf("%d,", array[i])
+func printArray() {
+	for _, value := range array {
+		fmt.Printf("%d  ", value)
 	}
 	fmt.Println()
-	fmt.Println("建堆之后：")
+}
+
+func main() {
+
+	fmt.Println("排序前")
+	printArray()
+	var length = len(array)
+
 	createHeap(array, length)
-	for i := 0; i < length; i++ {
-		fmt.Printf("%d,", array[i])
-	}
-	fmt.Printf("堆排序之后: ")
-	heapSort(array, length)
-	for i := 0; i < length; i++ {
-		fmt.Printf("%d,", array[i])
-	}
+
+	sort(array)
+
+	fmt.Println("排序后")
+	printArray()
 }
