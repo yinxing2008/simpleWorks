@@ -94,7 +94,7 @@ void shuffle(List<int> list) {
   list.shuffle();
 }
 
-void sort(List<int> list) {
+void sort2(List<int> list) {
   for (int i = 0; i < list.length - 1; i++) {
     for (int j = 0; j < list.length - 1 - i; j++) {
       if (list[j] > list[j + 1]) {
@@ -104,6 +104,46 @@ void sort(List<int> list) {
       }
     }
   }
+}
+
+void sort(List<int> array) {
+  int max = getMaxValue(array);
+  for (int exp = 1; max / exp > 0; exp *= 10) {
+    countSort(array, exp);
+  }
+}
+
+void countSort(List<int> array, int exp) {
+  var tmpArr = List.filled(array.length, 0);
+  var bucketArr = List.filled(10, 0);
+
+  for (int i = 0; i < array.length; i++) {
+    bucketArr[((array[i] / exp) % 10).toInt()]++;
+  }
+
+  for (int i = 1; i < 10; i++) {
+    bucketArr[i] += bucketArr[i - 1];
+  }
+
+  for (int i = array.length - 1; i >= 0; i--) {
+    tmpArr[bucketArr[((array[i] / exp) % 10).toInt()] - 1] = array[i];
+    bucketArr[((array[i] / exp) % 10).toInt()]--;
+  }
+
+  for (int i = 0; i < array.length; i++) {
+    array[i] = tmpArr[i];
+  }
+}
+
+int getMaxValue(List<int> array) {
+  int max = array[0];
+  for (int i = 1; i < array.length; i++) {
+    if (array[i] > max) {
+      max = array[i];
+    }
+  }
+
+  return max;
 }
 
 convertToStr(List<int> list) {
