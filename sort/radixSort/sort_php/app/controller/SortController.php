@@ -11,7 +11,7 @@ class SortController
 {
     public function sort()
     {
-        $array = [2, 1, 5, 42, 3];
+        $array = [2, 1, 5, 4, 3];
         $max = max($array);
         $max_digit = $this->get_digit($max);
 
