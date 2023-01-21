@@ -70,7 +70,7 @@ func sort() {
     }
     var index = -1
     for i in 0...counting.count-1 {
-        for j in 0...counting[i]-1 {
+        for _ in 0...counting[i]-1 {
             index += 1
             array[index] = i + min
         }
