@@ -50,8 +50,12 @@ public class Lblbc {
                 array[index] = tmpArray[right++];
             }
         }
-        while (left <= mid) array[index++] = tmpArray[left++];
-        while (right <= last) array[index++] = tmpArray[right++];
+        while (left <= mid) {
+            array[index++] = tmpArray[left++];
+        }
+        while (right <= last) {
+            array[index++] = tmpArray[right++];
+        }
     }
 
     private static void printArray(int[] array) {
