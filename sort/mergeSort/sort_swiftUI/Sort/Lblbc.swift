@@ -41,46 +41,44 @@ func shuffle() {
 }
 
 func sort() {
-    process(arr: &array, left: 0, right: array.count - 1)
+    sortMe(arr: &array, left: 0, right: array.count - 1)
 }
 
-func process(arr:inout [Int],left:Int,right:Int) {
+func sortMe(arr:inout [Int],left:Int,right:Int) {
     if left == right {
         return
     }
     let mid = left + (right - left) >> 1
-    process(arr: &arr, left: left, right: mid)
-    process(arr: &arr, left: mid + 1, right: right)
-    merge(arr: &arr, left: left, mid: mid, right: right)
-    
- 
+    sortMe(arr: &arr, left: left, right: mid)
+    sortMe(arr: &arr, left: mid + 1, right: right)
+    mergeSort(arr: &arr, left: left, mid: mid, right: right)
 }
 
-func merge(arr:inout [Int],left:Int,mid:Int,right:Int){
-    var help:[Int] = [Int]()
+func mergeSort(arr:inout [Int],left:Int,mid:Int,right:Int){
+    var tmpArr:[Int] = [Int]()
     var leftLocation:Int = left
     var rightLocation:Int = mid + 1
     
     while (leftLocation <= mid && rightLocation <= right) {
         if arr[leftLocation] <= arr[rightLocation] {
-            help.append(arr[leftLocation])
+            tmpArr.append(arr[leftLocation])
             leftLocation += 1
         }else{
-            help.append(arr[rightLocation])
+            tmpArr.append(arr[rightLocation])
             rightLocation += 1
         }
     }
     
     while leftLocation <= mid {
-        help.append(arr[leftLocation])
+        tmpArr.append(arr[leftLocation])
         leftLocation += 1
     }
     while rightLocation <= right {
-        help.append(arr[rightLocation])
+        tmpArr.append(arr[rightLocation])
         rightLocation += 1
     }
     var index = left
-    for item in help {
+    for item in tmpArr {
         arr[index] = item
         index += 1
     }
