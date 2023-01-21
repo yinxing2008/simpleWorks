@@ -29,11 +29,13 @@ public class Lblbc {
         int[] tmpArr = new int[array.length];
         int[] bucketArr = new int[10];
 
-        for (int i = 0; i < array.length; i++)
+        for (int i = 0; i < array.length; i++) {
             bucketArr[(array[i] / exp) % 10]++;
+        }
 
-        for (int i = 1; i < 10; i++)
+        for (int i = 1; i < 10; i++) {
             bucketArr[i] += bucketArr[i - 1];
+        }
 
         for (int i = array.length - 1; i >= 0; i--) {
             tmpArr[bucketArr[(array[i] / exp) % 10] - 1] = array[i];
