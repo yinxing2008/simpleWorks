@@ -60,7 +60,7 @@ export default {
       var bucketArr = Array(10).fill(0)
 
       for (var i = 0; i < array.length; i++) {
-        bucketArr[(array[i] / exp) % 10]++
+        bucketArr[Math.floor(array[i] / exp) % 10]++
       }
 
       for (var i = 1; i < 10; i++) {
@@ -68,8 +68,8 @@ export default {
       }
 
       for (var i = array.length - 1; i >= 0; i--) {
-        tmpArr[bucketArr[(array[i] / exp) % 10] - 1] = array[i]
-        bucketArr[(array[i] / exp) % 10]--
+        tmpArr[bucketArr[Math.floor(array[i] / exp) % 10] - 1] = array[i]
+        bucketArr[Math.floor(array[i] / exp) % 10]--
       }
 
       for (var i = 0; i < array.length; i++) {
