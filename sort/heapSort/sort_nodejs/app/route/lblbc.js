@@ -16,16 +16,31 @@ router.get('sort', async (ctx) => {
 
 function sort() {
   let array = [2, 1, 5, 4, 3]
-  for (let i = 0; i < array.length - 1; i++) {
-    for (let j = 0; j < array.length - 1 - i; j++) {
-      if (array[j] > array[j + 1]) {
-        let tmp = array[j + 1]
-        array[j + 1] = array[j]
-        array[j] = tmp
-      }
-    }
+  for (var i = Math.floor(array.length / 2) - 1; i >= 0; i--) {
+    adjustHeap(array, i, array.length)
+  }
+  for (var j = array.length - 1; j > 0; j--) {
+    var temp = array[0]
+    array[0] = array[j]
+    array[j] = temp
+    adjustHeap(array, 0, j)
   }
   return convertToStr(array)
+}
+function adjustHeap(array, i, length) {
+  var tmp = array[i]
+  for (var j = i * 2 + 1; j < length; j = j * 2 + 1) {
+    if (j + 1 < length && array[j] < array[j + 1]) {
+      j++
+    }
+    if (array[j] > tmp) {
+      array[i] = array[j]
+      i = j
+    } else {
+      break
+    }
+  }
+  array[i] = tmp
 }
 
 function convertToStr(array) {
