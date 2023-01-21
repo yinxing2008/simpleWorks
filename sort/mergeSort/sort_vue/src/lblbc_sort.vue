@@ -33,17 +33,43 @@ export default {
     },
     sort() {
       let array = this.array
-      for (let i = 0; i < array.length - 1; i++) {
-        for (let j = 0; j < array.length - 1 - i; j++) {
-          if (array[j] > array[j + 1]) {
-            let tmp = array[j + 1]
-            array[j + 1] = array[j]
-            array[j] = tmp
-          }
-        }
-      }
+      var first = 0
+      var last = array.length - 1
+      this.mergeSort(first, last)
       this.array = array
       this.arrayStr = this.convertToStr(array)
+    },
+    mergeSort(first: number, last: number) {
+      if (first < last) {
+        var mid = Math.floor((first + last) / 2)
+        this.mergeSort(first, mid)
+        this.mergeSort(mid + 1, last)
+        this.binaryMerge(first, mid, last)
+      }
+    },
+    binaryMerge(first: number, mid: number, last: number) {
+      let array = this.array
+      var tmpArray = Array(array.length).fill(0)
+      var left: number, right: number, index: number
+      for (index = first; index <= last; index++) {
+        tmpArray[index] = array[index]
+      }
+      index = first
+      left = first
+      right = mid + 1
+      for (; left <= mid && right <= last && index <= last; index++) {
+        if (tmpArray[left] <= tmpArray[right]) {
+          array[index] = tmpArray[left++]
+        } else {
+          array[index] = tmpArray[right++]
+        }
+      }
+      while (left <= mid) {
+        array[index++] = tmpArray[left++]
+      }
+      while (right <= last) {
+        array[index++] = tmpArray[right++]
+      }
     },
     convertToStr(array: number[]) {
       var result = ''
