@@ -43,20 +43,6 @@ struct Lblbc {
     this.array = [2, 1, 5, 4, 3]
   }
 
-//  sort() {
-//    let array = this.array
-//    for (let i = 0; i < array.length - 1; i++) {
-//      for (let j = 0; j < array.length - 1 - i; j++) {
-//        if (array[j] > array[j + 1]) {
-//          let tmp = array[j + 1]
-//          array[j + 1] = array[j]
-//          array[j] = tmp
-//        }
-//      }
-//    }
-//    this.array = array
-//  }
-
   sort() {
     let array = this.array
     var brr = []
