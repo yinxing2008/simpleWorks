@@ -32,7 +32,7 @@ void sort(int array[], int count)
 	}
 
 	int bucketLen = max - min + 1;
-	int bucket[bucketLen];
+	int *bucket = new int[bucketLen];
 	for (int i = 0; i < bucketLen; i++)
 	{
 		bucket[i] = 0;
@@ -54,6 +54,7 @@ void sort(int array[], int count)
 		}
 		start += bucket[i];
 	}
+	delete[] bucket;
 }
 
 int main()

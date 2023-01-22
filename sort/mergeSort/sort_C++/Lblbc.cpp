@@ -19,7 +19,7 @@ void mergeSort(int arr[], int left, int mid, int right)
 	int i = left;
 	int j = mid + 1;
 	int k = 0;
-	int tmp[right - left + 1];
+	int *tmp = new int[right - left + 1];
 	while (i <= mid && j <= right)
 	{
 		if (arr[i] < arr[j])
@@ -36,7 +36,10 @@ void mergeSort(int arr[], int left, int mid, int right)
 		tmp[k++] = arr[j++];
 	}
 	for (i = 0; i < k; i++)
+	{
 		arr[left++] = tmp[i];
+	}
+	delete[] tmp;
 }
 
 void sort(int array[], int left, int right)
