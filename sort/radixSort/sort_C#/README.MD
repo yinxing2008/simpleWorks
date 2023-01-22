@@ -1,616 +1,756 @@
+
 # 开源地址
-[https://gitee.com/lblbc/simple-works/tree/master/sort/](https://gitee.com/lblbc/simple-works/tree/master/sort/)
-覆盖语言：C、C++、C#、Java、Kotlin、Dart、Go、JavaScript(JS)、TypeScript(TS)、ArkTS、swift、PHP。
-覆盖平台：安卓(Java、Kotlin)、iOS(SwiftUI)、Flutter(Dart)、Window桌面(C#)、前端(微信小程序、uni-app、vue)、后端（Java、Kotlin、NodeJS、Python、PHP、Go、C、C++）、鸿蒙
-![](https://img-blog.csdnimg.cn/94c1c52fe64f4e0b879829679e535cf8.png)
+[https://gitee.com/lblbc/simple-works/tree/master/sort/](https://gitee.com/lblbc/simple-works/tree/master/sort/)  
+> 覆盖语言：C、C++、C#、Java、Kotlin、Dart、Go、JavaScript(JS)、TypeScript(TS)、ArkTS、swift、PHP。  
+> 覆盖平台：安卓(Java、Kotlin)、iOS(SwiftUI)、Flutter(Dart)、Window桌面(C#)、前端(微信小程序、uni-app、vue)、后端（Java、Kotlin、NodeJS、Python、PHP、Go、C、C++）、鸿蒙  
 
-![image](https://img-blog.csdnimg.cn/img_convert/965af557d5b8cc11b30f1dfd9f67eb90.png)
+![](https://img-blog.csdnimg.cn/f7ba5b3299a24d338b8a71eb8cbd99b7.png)
+![image](https://img-blog.csdnimg.cn/img_convert/38c89e2baadeed40e6c5353768ae6cf0.png)
 # 1. 安卓Java版
+开发工具：[下载Android Studio](https://cxyxy.blog.csdn.net/article/details/107098873)
 ```java
-private static void sort(int[] array) {
-    sortMe(array, 0, array.length - 1);
-}
 
-private static void sortMe(int[] array, int low, int high) {
-    if (low >= high) {
-        return;
+    private static void sort(int[] array) {
+        int max = getMaxValue(array);
+        for (int exp = 1; max / exp > 0; exp *= 10)
+            countSort(array, exp);
     }
-    int pivot = array[low];
-    int l = low;
-    int r = high;
-    int tmp;
-    while (l < r) {
-        while (l < r && array[r] >= pivot) {
-            r--;
-        }
-        while (l < r && array[l] <= pivot) {
-            l++;
-        }
-        if (l < r) {
-            tmp = array[l];
-            array[l] = array[r];
-            array[r] = tmp;
-        }
-    }
-    array[low] = array[l];
-    array[l] = pivot;
-    if (low < l) {
-        sortMe(array, low, l - 1);
-    }
-    if (r < high) {
-        sortMe(array, r + 1, high);
-    }
-}
-```
-![](https://img-blog.csdnimg.cn/img_convert/dd8fdfe899ee0f7c57b5726a27ce8989.png)
 
-# 2. 安卓Kotlin版
-```kotlin
-private fun sort(array: IntArray) {
-    sortMe(array, 0, array.size - 1)
-}
+    private static void countSort(int[] array, int exp) {
+        int[] tmpArr = new int[array.length];
+        int[] bucketArr = new int[10];
 
-private fun sortMe(array: IntArray, low: Int, high: Int) {
-    if (low >= high) {
-        return
-    }
-    val pivot = array[low]
-    var l = low
-    var r = high
-    var tmp: Int
-    while (l < r) {
-        while (l < r && array[r] >= pivot) {
-            r--
+        for (int i = 0; i < array.length; i++) {
+            bucketArr[(array[i] / exp) % 10]++;
         }
-        while (l < r && array[l] <= pivot) {
-            l++
+
+        for (int i = 1; i < 10; i++) {
+            bucketArr[i] += bucketArr[i - 1];
         }
-        if (l < r) {
-            tmp = array[l]
-            array[l] = array[r]
-            array[r] = tmp
+
+        for (int i = array.length - 1; i >= 0; i--) {
+            tmpArr[bucketArr[(array[i] / exp) % 10] - 1] = array[i];
+            bucketArr[(array[i] / exp) % 10]--;
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            array[i] = tmpArr[i];
         }
     }
-    array[low] = array[l]
-    array[l] = pivot
-    if (low < l) {
-        sortMe(array, low, l - 1)
-    }
-    if (r < high) {
-        sortMe(array, r + 1, high)
-    }
-}
-```
-![](https://img-blog.csdnimg.cn/img_convert/c18ef8d72a0d8533cfcf56e1381d0e4d.png)
 
-# 3. NodeJS
-```js
-function sort() {
-  sortMe(0, array.length - 1);
-  return convertToStr(array);
-}
-
-function sortMe(slow, fast) {
-  let base = array[slow];
-  array[slow] = 0;
-  let left = slow;
-  let right = fast;
-  while (left < right) {
-
-    if (array[left] === 0) {
-      if (array[right] < base) {
-        array[left] = array[right];
-        array[right] = 0;
-        left = left + 1;
-      }
-      else {
-        right = right - 1;
-      }
-    } else if (array[right] === 0) {
-      if (array[left] >= base) {
-        array[right] = array[left];
-        array[left] = 0;
-        right = right - 1;
-      }
-      else {
-        left = left + 1;
-      }
-    }
-  }
-  array[left] = base;
-  if ((left - 1) - slow > 0) {
-    sortMe(slow, left - 1);
-  }
-  if (fast - (right + 1) > 0) {
-    sortMe(right + 1, fast);
-  }
-  return
-}
-```
-![](https://img-blog.csdnimg.cn/62b76ce5e5ac44b281c9de3a9e99577b.png)
-
-# 4. Php
-```php
-public function sort()
-    {
-        $array = [2, 1, 5, 4, 3];
-        $result = $this->sortMe($array);
-        return var_dump($result);
-    }
-
-    public function sortMe($arr)
-    {
-        $length = count($arr);
-        if (!is_array($arr) || $length <= 1) {
-            return $arr;
-        }
-        $baseValue = $arr[0];
-        $leftArr = array();
-        $rightArr = array();
-        for ($i = 1; $i < $length; $i++) {
-            if ($arr[$i] < $baseValue) {
-                $leftArr[] = $arr[$i];
-            } else {
-                $rightArr[] = $arr[$i];
+    private static int getMaxValue(int[] array) {
+        int max = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
             }
         }
-        $leftArr = $this->sortMe($leftArr);
-        $rightArr = $this->sortMe($rightArr);
-        return array_merge($leftArr, array($baseValue), $rightArr);
+
+        return max;
     }
 ```
-![](https://img-blog.csdnimg.cn/1b86b47fb80045afb0478cfe36a103b6.png)
+![image](https://img-blog.csdnimg.cn/img_convert/8a816baa9ad1e0cbd5bd0f503cd38601.png)
+
+# 2. 安卓Kotlin版
+开发工具：[下载Android Studio](https://cxyxy.blog.csdn.net/article/details/107098873)
+```kotlin
+
+private fun sort(array: IntArray) {
+    val max = getMaxValue(array)
+    var exp = 1
+    while (max / exp > 0) {
+        countSort(array, exp)
+        exp *= 10
+    }
+}
+
+private fun countSort(array: IntArray, exp: Int) {
+    val tmpArr = IntArray(array.size)
+    val bucketArr = IntArray(10)
+    for (i in array.indices) bucketArr[array[i] / exp % 10]++
+    for (i in 1..9) bucketArr[i] += bucketArr[i - 1]
+    for (i in array.indices.reversed()) {
+        tmpArr[bucketArr[array[i] / exp % 10] - 1] = array[i]
+        bucketArr[array[i] / exp % 10]--
+    }
+    for (i in array.indices) {
+        array[i] = tmpArr[i]
+    }
+}
+
+private fun getMaxValue(array: IntArray): Int {
+    var max = array[0]
+    for (i in 1 until array.size) {
+        if (array[i] > max) {
+            max = array[i]
+        }
+    }
+    return max
+}
+
+```
+![image](https://img-blog.csdnimg.cn/img_convert/f3a5f272743f38ec5f3d8e6ec4940a02.png)
+
+# 3. NodeJS
+开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
+```js
+
+function sort() {
+  let array = [2, 1, 5, 4, 3]
+  var max = getMaxValue(array)
+  for (var exp = 1; max / exp > 0; exp *= 10) {
+    countSort(array, exp)
+  }
+}
+function countSort(array, exp) {
+  var tmpArr = Array(array.length).fill(0)
+  var bucketArr = Array(10).fill(0)
+
+  for (var i = 0; i < array.length; i++) {
+    bucketArr[Math.floor(array[i] / exp) % 10]++
+  }
+
+  for (var i = 1; i < 10; i++) {
+    bucketArr[i] += bucketArr[i - 1]
+  }
+
+  for (var i = array.length - 1; i >= 0; i--) {
+    tmpArr[bucketArr[Math.floor(array[i] / exp) % 10] - 1] = array[i]
+    bucketArr[Math.floor(array[i] / exp) % 10]--
+  }
+
+  for (var i = 0; i < array.length; i++) {
+    array[i] = tmpArr[i]
+  }
+}
+function getMaxValue(array) {
+  var max = array[0]
+  for (var i = 1; i < array.length; i++) {
+    if (array[i] > max) {
+      max = array[i]
+    }
+  }
+
+  return max
+}
+
+```
+![image](https://img-blog.csdnimg.cn/img_convert/f92c98533aaf6264fdaf8227f94de76b.png)
+
+# 4. Php
+开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
+```php
+  public function sort()
+    {
+        $array = [2, 1, 5, 4, 3];
+        $max = max($array);
+        $max_digit = $this->get_digit($max);
+
+        for ($i = 1; $i <= $max_digit; $i++) {
+            $this->counting_sort($array, $i);
+        }
+        return var_dump($array);
+    }
+
+    public function counting_sort(&$array, $digit_num = false)
+    {
+        if ($digit_num !== false) {
+            for ($i = 0; $i < count($array); $i++) {
+                $array_temp[$i] = $this->get_specific_digit($array[$i], $digit_num);
+            }
+        } else {
+            $array_temp = $array;
+        }
+
+        $max = max($array);
+        $time_array = array();
+
+        for ($i = 0; $i <= $max; $i++) {
+            $time_array[$i] = 0;
+        }
+
+        for ($i = 0; $i < count($array_temp); $i++) {
+            $time_array[$array_temp[$i]]++;
+        }
+
+        for ($i = 0; $i < count($time_array) - 1; $i++) {
+            $time_array[$i + 1] += $time_array[$i];
+        }
+
+        for ($i = count($array) - 1; $i >= 0; $i--) {
+            $sorted_array[$time_array[$array_temp[$i]] - 1] = $array[$i];
+            $time_array[$array_temp[$i]]--;
+        }
+
+        $array = $sorted_array;
+        ksort($array);
+    }
+
+    public function get_digit($number)
+    {
+        $i = 1;
+        while ($number >= pow(10, $i)) {
+            $i++;
+        }
+
+        return $i;
+    }
+
+    public function get_specific_digit($num, $i)
+    {
+        if ($num < pow(10, $i - 1)) {
+            return 0;
+        }
+        return floor($num % pow(10, $i) / pow(10, $i - 1));
+    }
+```
+![image](https://img-blog.csdnimg.cn/img_convert/749b42523743051e6bb61f899664e4e8.png)
 
 # 5. Python
+开发工具：[下载PyCharm](https://cxyxy.blog.csdn.net/article/details/128722649)
 ```python
+
 array = [2, 1, 5, 4, 3]
 
 
-def sort(array, low, high):
-    if low >= high:
-        return array
-    i = low
-    j = high
-    pivot = array[low]
-    while i < j:
-        while i < j and array[j] > pivot:
-            j -= 1
-        array[i] = array[j]
-        while i < j and array[i] < pivot:
-            i += 1
-        array[j] = array[i]
-    array[j] = pivot
+def sort():
+    max_num = max(array)
+    it = 0
+    while 10 ** it <= max_num:
+        buckets = [[] for _ in range(10)]
+        for num in array:
+            digit = (num // 10 ** it) % 10
+            buckets[digit].append(num)
+        array.clear()
+        for buc in buckets:
+            array.extend(buc)
 
-    sort(array, low, j - 1)
-    sort(array, j + 1, high)
+        it += 1
 
-    return
 ```
-![](https://img-blog.csdnimg.cn/f0f6b38ef4cc4e11afbb2abad6f2a03e.png)
+![image](https://img-blog.csdnimg.cn/img_convert/5c9aa2875387231270deb615fea84aec.png)
 # 6. Swift(SwiftUI版)
+开发工具：XCode(mac电脑自带)
 ```swift
 var array = [2, 1, 5, 4, 3]
-func sort() {
-    sortMe(array: &array, left: 0, right: array.count - 1)
-}
 
-func sortMe(array: inout [Int], left: Int, right: Int) {
-    if right - left <= 0 {
-        return
-    }
+func sort() {
+    var bucket = createBucket()
+    let maxNum = getMaxValue(array: array)
+    let maxLength = getNumberLen(number: maxNum)
     
-    var flagIndex = left
-    let flagValue = array[left]
-    
-    for index in stride(from: left + 1, to: right + 1, by: 1) {
-        let value = array[index]
-        if value < flagValue {
-            array[flagIndex] = value
-            flagIndex += 1
-            array[index] = array[flagIndex]
-            array[flagIndex] = flagValue
+    for digit in 1...maxLength {
+        for item in array {
+            let baseNumber = fetchBaseNumber(number: item, digit: digit)
+            bucket[baseNumber].append(item)
+        }
+        
+        var index = 0
+        for i in 0..<bucket.count {
+            while !bucket[i].isEmpty {
+                array[index] = bucket[i].remove(at: 0)
+                index += 1
+            }
         }
     }
-    
-    sortMe(array: &array, left: left, right: flagIndex - 1)
-    sortMe(array: &array, left: flagIndex + 1, right: right)
+}
+
+private func createBucket() -> Array<Array<Int>> {
+    var bucket: Array<Array<Int>> = []
+    for _ in 0..<10 {
+        bucket.append([])
+    }
+    return bucket
+}
+
+private func getMaxValue(array: Array<Int>) -> Int {
+    var maxNumber = array[0]
+    for item in array {
+        if maxNumber < item {
+            maxNumber = item
+        }
+    }
+    return maxNumber
+}
+
+func getNumberLen(number: Int) -> Int {
+    return "\(number)".count
+}
+
+func fetchBaseNumber(number: Int, digit: Int) -> Int{
+    if digit > 0 && digit <= getNumberLen(number: number) {
+        var numbersArray: Array<Int> = []
+        for char in "\(number)" {
+            numbersArray.append(Int("\(char)")!)
+        }
+        return numbersArray[numbersArray.count - digit]
+    }
+    return 0
 }
 ```
-![](https://img-blog.csdnimg.cn/af6896d2a6ff4166bfd308335b0f749b.png)
+![image](https://img-blog.csdnimg.cn/img_convert/6c8c812dd388572daa842d5fcb794e8a.png)
 
 # 7. uni-app
+开发工具：[下载HBuilderX](https://cxyxy.blog.csdn.net/article/details/128722661)
 ```js
 sort() {
-	let array = this.array;
-	this.sortMe(array, 0, array.length - 1);
-	this.array = array
-	this.arrayStr = this.convertToStr(array)
+	let array = [2, 1, 5, 4, 3]
+	var max = this.getMaxValue(array)
+	for (var exp = 1; max / exp > 0; exp *= 10) {
+		this.countSort(array, exp)
+	}
 },
-sortMe(array: number[], low: number, high: number) {
-	if (low >= high) {
-		return;
+countSort(array: number[], exp: number) {
+	var tmpArr = Array(array.length).fill(0)
+	var bucketArr = Array(10).fill(0)
+
+	for (var i = 0; i < array.length; i++) {
+		bucketArr[Math.floor(array[i] / exp) % 10]++
 	}
-	var index = array[low];
-	var i = low;
-	var j = high;
-	while (i < j) {
-		while (i < j && array[j] >= index) {
-			j--;
-		}
-		if (i < j) {
-			array[i] = array[j];
-			i++;
-		}
-		while (i < j && array[i] < index) {
-			i++;
-		}
-		if (i < j) {
-			array[j] = array[i];
-			j--;
+
+	for (var i = 1; i < 10; i++) {
+		bucketArr[i] += bucketArr[i - 1]
+	}
+
+	for (var i = array.length - 1; i >= 0; i--) {
+		tmpArr[bucketArr[Math.floor(array[i] / exp) % 10] - 1] = array[i]
+		bucketArr[Math.floor(array[i] / exp) % 10]--
+	}
+
+	for (var i = 0; i < array.length; i++) {
+		array[i] = tmpArr[i]
+	}
+},
+getMaxValue(array: number[]) {
+	var max = array[0]
+	for (var i = 1; i < array.length; i++) {
+		if (array[i] > max) {
+			max = array[i]
 		}
 	}
-	array[i] = index;
-	this.sortMe(array, low, i - 1);
-	this.sortMe(array, i + 1, high);
+
+	return max
 },
 ```
-![](https://img-blog.csdnimg.cn/img_convert/f53374e28b7d0841c8ebbb2de0ecd647.png)
+![image](https://img-blog.csdnimg.cn/img_convert/aae8f6f62c507b41cde158631c7286c7.png)
 
 # 8. vue
-```js
-
-```
-![](https://img-blog.csdnimg.cn/1167456bbf824e729553a0e7dbd4c1ca.png)
-# 9. 微信小程序
+开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
 ```js
 sort() {
-  let array = this.data.array;
-  this.sortMe(array, 0, array.length - 1);
-  this.setData({
-    array: array,
-    arrayStr: this.convertToStr(array),
-  })
-},
-sortMe(array: number[], low: number, high: number) {
-  if (low >= high) {
-    return;
-  }
-  var index = array[low];
-  var i = low;
-  var j = high;
-  while (i < j) {
-    while (i < j && array[j] >= index) {
-      j--;
-    }
-    if (i < j) {
-      array[i] = array[j];
-      i++;
-    }
-    while (i < j && array[i] < index) {
-      i++;
-    }
-    if (i < j) {
-      array[j] = array[i];
-      j--;
-    }
-  }
-  array[i] = index;
-  this.sortMe(array, low, i - 1);
-  this.sortMe(array, i + 1, high);
-},
+      let array = [2, 1, 5, 4, 3]
+      var max = this.getMaxValue(array)
+      for (var exp = 1; max / exp > 0; exp *= 10) {
+        this.countSort(array, exp)
+      }
+    },
+    countSort(array: number[], exp: number) {
+      var tmpArr = Array(array.length).fill(0)
+      var bucketArr = Array(10).fill(0)
+
+      for (var i = 0; i < array.length; i++) {
+        bucketArr[Math.floor(array[i] / exp) % 10]++
+      }
+
+      for (var i = 1; i < 10; i++) {
+        bucketArr[i] += bucketArr[i - 1]
+      }
+
+      for (var i = array.length - 1; i >= 0; i--) {
+        tmpArr[bucketArr[Math.floor(array[i] / exp) % 10] - 1] = array[i]
+        bucketArr[Math.floor(array[i] / exp) % 10]--
+      }
+
+      for (var i = 0; i < array.length; i++) {
+        array[i] = tmpArr[i]
+      }
+    },
+    getMaxValue(array: number[]) {
+      var max = array[0]
+      for (var i = 1; i < array.length; i++) {
+        if (array[i] > max) {
+          max = array[i]
+        }
+      }
+
+      return max
+    },
 ```
-![](https://img-blog.csdnimg.cn/img_convert/28ba1be7231483c6826a865c2bceea0d.png)
+![](https://img-blog.csdnimg.cn/img_convert/63fb070e00f53d269fa5402b3ac7b8c8.png)
+
+# 9. 微信小程序
+开发工具：[下载微信开发者工具](https://cxyxy.blog.csdn.net/article/details/128732108)
+```js
+sort() {
+    let array = [2, 1, 5, 4, 3]
+    var max = this.getMaxValue(array)
+    for (var exp = 1; max / exp > 0; exp *= 10) {
+      this.countSort(array, exp)
+    }
+
+    this.setData({
+      array: array,
+      arrayStr: this.convertToStr(array),
+    })
+  },
+  countSort(array: number[], exp: number) {
+    var tmpArr = Array(array.length).fill(0)
+    var bucketArr = Array(10).fill(0)
+
+    for (var i = 0; i < array.length; i++) {
+      bucketArr[Math.floor(array[i] / exp) % 10]++
+    }
+
+    for (var i = 1; i < 10; i++) {
+      bucketArr[i] += bucketArr[i - 1]
+    }
+
+    for (var i = array.length - 1; i >= 0; i--) {
+      tmpArr[bucketArr[Math.floor(array[i] / exp) % 10] - 1] = array[i]
+      bucketArr[Math.floor(array[i] / exp) % 10]--
+    }
+
+    for (var i = 0; i < array.length; i++) {
+      array[i] = tmpArr[i]
+    }
+  },
+  getMaxValue(array: number[]) {
+    var max = array[0]
+    for (var i = 1; i < array.length; i++) {
+      if (array[i] > max) {
+        max = array[i]
+      }
+    }
+
+    return max
+  },
+```
+![image](https://img-blog.csdnimg.cn/img_convert/b5a21804aa4207db15464f66e939934c.png)
 
 # 10. 鸿蒙(ArkTS)
+开发工具：[下载DevEco Studio](https://developer.harmonyos.com/cn/develop/deveco-studio)
 ```js
- sort() {
-    let array = this.array;
-    this.sortMe(array, 0, array.length - 1);
-    this.array = array
+
+  sort() {
+    let array = [2, 1, 5, 4, 3]
+    var max = this.getMaxValue(array)
+    for (var exp = 1; max / exp > 0; exp *= 10) {
+      this.countSort(array, exp)
+    }
   }
 
-  sortMe(array: number[], low: number, high: number) {
-    if (low >= high) {
-      return;
+  countSort(array: number[], exp: number) {
+    var tmpArr = Array(array.length).fill(0)
+    var bucketArr = Array(10).fill(0)
+
+    for (var i = 0; i < array.length; i++) {
+      bucketArr[Math.floor(array[i] / exp) % 10]++
     }
-    var index = array[low];
-    var i = low;
-    var j = high;
-    while (i < j) {
-      while (i < j && array[j] >= index) {
-        j--;
-      }
-      if (i < j) {
-        array[i] = array[j];
-        i++;
-      }
-      while (i < j && array[i] < index) {
-        i++;
-      }
-      if (i < j) {
-        array[j] = array[i];
-        j--;
+
+    for (var i = 1; i < 10; i++) {
+      bucketArr[i] += bucketArr[i - 1]
+    }
+
+    for (var i = array.length - 1; i >= 0; i--) {
+      tmpArr[bucketArr[Math.floor(array[i] / exp) % 10] - 1] = array[i]
+      bucketArr[Math.floor(array[i] / exp) % 10]--
+    }
+
+    for (var i = 0; i < array.length; i++) {
+      array[i] = tmpArr[i]
+    }
+  }
+
+  getMaxValue(array: number[]) {
+    var max = array[0]
+    for (var i = 1; i < array.length; i++) {
+      if (array[i] > max) {
+        max = array[i]
       }
     }
-    array[i] = index;
-    this.sortMe(array, low, i - 1);
-    this.sortMe(array, i + 1, high);
+
+    return max
   }
 ```
-![](https://img-blog.csdnimg.cn/11b4a3311b24416da4b7ca2077924a81.png)
+![image](https://img-blog.csdnimg.cn/img_convert/6d192a219105cdd43ca45aa288281214.png)
 # 11. Go语言
+开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
 ```go
-func sort(left int, right int, array *[5]int) {
-	l := left
-	r := right
-	pivot := array[(left+right)/2]
-	tmp := 0
-	for l < r {
-		for array[l] < pivot {
-			l++
-		}
-		for array[r] > pivot {
-			r--
-		}
-		if l >= r {
-			break
-		}
-		tmp = array[l]
-		array[l] = array[r]
-		array[r] = tmp
-		if array[l] == pivot {
-			r--
-		}
-		if array[r] == pivot {
-			l++
-		}
-	}
-	if l == r {
-		l++
-		r--
-	}
-	if left < r {
-		sort(left, r, array)
-	}
-	if right > l {
-		sort(l, right, array)
-	}
-}
-```
-![](https://img-blog.csdnimg.cn/d39afaa953aa4a0f967f54072b8d9df0.png)
-# 12. Java
-```java
-private static void sort(int[] array) {
-    sortMe(array, 0, array.length - 1);
-}
 
-public static void sortMe(int[] array, int low, int high) {
-    if (low >= high) {
-        return;
-    }
-    int pivot = array[low];
-    int l = low;
-    int r = high;
-    int tmp;
-    while (l < r) {
-        while (l < r && array[r] >= pivot) {
-            r--;
-        }
-        while (l < r && array[l] <= pivot) {
-            l++;
-        }
-        if (l < r) {
-            tmp = array[l];
-            array[l] = array[r];
-            array[r] = tmp;
-        }
-    }
-    array[low] = array[l];
-    array[l] = pivot;
-    if (low < l) {
-        sortMe(array, low, l - 1);
-    }
-    if (r < high) {
-        sortMe(array, r + 1, high);
-    }
+var max_num_bucket int = 0
+
+func radixSort(arr []int) {
+	var queue map[int][]int
+	var radix int = 0
+	var base int = 1
+	var key int
+	var keys []int
+	var index int
+	max := arr[0]
+	for _, val := range arr {
+		if val > max {
+			max = val
+		}
+	}
+	for max != 0 {
+		radix++
+		max /= 10
+	}
+
+	for i := 0; i < radix; i++ {
+		queue = make(map[int][]int)
+		keys = nil
+		index = 0
+		for _, val := range arr {
+			key = val % (base * 10) / base
+			queue[key] = append(queue[key], val)
+		}
+		if len(queue) > max_num_bucket {
+			max_num_bucket = len(queue)
+		}
+		for key := range queue {
+			keys = append(keys, key)
+		}
+		sort.Ints(keys)
+		for _, key := range keys {
+			for _, val := range queue[key] {
+				arr[index] = val
+				index++
+			}
+		}
+		base *= 10
+	}
 }
 ```
-![](https://img-blog.csdnimg.cn/img_convert/d0e1f96e0e5d0869ee9a72964fbd0ffa.png)
+![image](https://img-blog.csdnimg.cn/img_convert/c85caab1cd20b6dd525fda166920264d.png)
+# 12. Java
+开发工具：[下载IntelliJ IDEA](https://cxyxy.blog.csdn.net/article/details/128722658)
+```java
+
+    private static void sort(int[] array) {
+        int max = getMaxValue(array);
+        for (int exp = 1; max / exp > 0; exp *= 10)
+            countSort(array, exp);
+    }
+
+    private static void countSort(int[] array, int exp) {
+        int[] tmpArr = new int[array.length];
+        int[] bucketArr = new int[10];
+
+        for (int i = 0; i < array.length; i++) {
+            bucketArr[(array[i] / exp) % 10]++;
+        }
+
+        for (int i = 1; i < 10; i++) {
+            bucketArr[i] += bucketArr[i - 1];
+        }
+
+        for (int i = array.length - 1; i >= 0; i--) {
+            tmpArr[bucketArr[(array[i] / exp) % 10] - 1] = array[i];
+            bucketArr[(array[i] / exp) % 10]--;
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            array[i] = tmpArr[i];
+        }
+    }
+
+    private static int getMaxValue(int[] array) {
+        int max = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+        }
+
+        return max;
+    }
+```
+![image](https://img-blog.csdnimg.cn/img_convert/40cb29251cb320301163cdd7f171276e.png)
 
 # 13. Kotlin
+开发工具：[下载IntelliJ IDEA](https://cxyxy.blog.csdn.net/article/details/128722658)
 ```kotlin
+
 private fun sort(array: IntArray) {
-    sortMe(array, 0, array.size - 1)
+    val max = getMaxValue(array)
+    var exp = 1
+    while (max / exp > 0) {
+        countSort(array, exp)
+        exp *= 10
+    }
 }
 
-fun sortMe(array: IntArray, low: Int, high: Int) {
-    if (low >= high) {
-        return
+private fun countSort(array: IntArray, exp: Int) {
+    val tmpArr = IntArray(array.size)
+    val bucketArr = IntArray(10)
+    for (i in array.indices) bucketArr[array[i] / exp % 10]++
+    for (i in 1..9) bucketArr[i] += bucketArr[i - 1]
+    for (i in array.indices.reversed()) {
+        tmpArr[bucketArr[array[i] / exp % 10] - 1] = array[i]
+        bucketArr[array[i] / exp % 10]--
     }
-    val pivot = array[low]
-    var l = low
-    var r = high
-    var tmp: Int
-    while (l < r) {
-        while (l < r && array[r] >= pivot) {
-            r--
-        }
-        while (l < r && array[l] <= pivot) {
-            l++
-        }
-        if (l < r) {
-            tmp = array[l]
-            array[l] = array[r]
-            array[r] = tmp
-        }
-    }
-    array[low] = array[l]
-    array[l] = pivot
-    if (low < l) {
-        sortMe(array, low, l - 1)
-    }
-    if (r < high) {
-        sortMe(array, r + 1, high)
+    for (i in array.indices) {
+        array[i] = tmpArr[i]
     }
 }
+
+private fun getMaxValue(array: IntArray): Int {
+    var max = array[0]
+    for (i in 1 until array.size) {
+        if (array[i] > max) {
+            max = array[i]
+        }
+    }
+    return max
+}
+
 ```
-![](https://img-blog.csdnimg.cn/img_convert/08588b3ff383e7591394b88507b07f94.png)
+![image](https://img-blog.csdnimg.cn/img_convert/206003262b01d127af1db0a03741985b.png)
 
 # 14. Flutter
+开发工具：[下载IntelliJ IDEA](https://cxyxy.blog.csdn.net/article/details/128722658)
 ```dart
-List<int> sort(List<int> list) {
-  if (list.length < 2) {
-    return list;
-  } else {
-    var pivot = list[0];
-    var less = <int>[];
-    var greater = <int>[];
-    list.removeAt(0);
-    for (var i in list) {
-      if (i <= pivot) {
-        less.add(i);
-      } else {
-        greater.add(i);
-      }
-    }
-    return sort(less) + [pivot] + sort(greater);
-  }
-}
+
 ```
-![](https://img-blog.csdnimg.cn/a57f561c0fa4429b854cc31834dc4afc.png)
+![](https://img-blog.csdnimg.cn/img_convert/39afcc60a45a08b9155fdb259fa8c4cc.png)
 
 # 15. C语言
+开发工具：[下载Visual Studio](https://cxyxy.blog.csdn.net/article/details/128722639)
 ```c
 
-void sortMe(int* array, int low, int high)
+void sort(int *arr, int n)
 {
-    if (low >= high)
-    {
-        return;
-    }
-    int index = array[low];
-    int i = low;
-    int j = high;
-    while (i < j)
-    {
-        while (i < j && array[j] >= index)
-        {
-            j--;
-        }
-        if (i < j)
-        {
-            array[i] = array[j];
-            i++;
-        }
-        while (i < j && array[i] < index)
-        {
-            i++;
-        }
-        if (i < j)
-        {
-            array[j] = array[i];
-            j--;
-        }
-    }
-    array[i] = index;
-    sortMe(array, low, i - 1);
-    sortMe(array, i + 1, high);
+	int max = arr[0];
+	int base = 1;
+
+	for (int i = 0; i < n; i++)
+	{
+		if (arr[i] > max)
+		{
+			max = arr[i];
+		}
+	}
+	int *tmpArr = (int *)malloc(sizeof(int) * n);
+
+	while (max / base > 0)
+	{
+		int bucket[10] = {0};
+		for (int i = 0; i < n; i++)
+		{
+			bucket[arr[i] / base % 10]++;
+		}
+		for (int i = 1; i < 10; i++)
+		{
+			bucket[i] += bucket[i - 1];
+		}
+		for (int i = n - 1; i >= 0; i--)
+		{
+			tmpArr[bucket[arr[i] / base % 10] - 1] = arr[i];
+			bucket[arr[i] / base % 10]--;
+		}
+		for (int i = 0; i < n; i++)
+		{
+			arr[i] = tmpArr[i];
+		}
+		base *= 10;
+	}
+	free(tmpArr);
 }
 
-void sort(int* array, int count)
-{
-    sortMe(array, 0, count - 1);
-}
 ```
-![](https://img-blog.csdnimg.cn/img_convert/0798e17c80f2a8fe637d48fa46ff9fc8.png)
+![image](https://img-blog.csdnimg.cn/img_convert/92f1f1da2dc8392bf15e185e0cb33b89.png)
 
 # 16. C++
+开发工具：[下载Visual Studio](https://cxyxy.blog.csdn.net/article/details/128722639)
 ```cpp
 
-void sortMe(int* array, int low, int high)
+void sort(int *arr, int n)
 {
-    if (low >= high)
-    {
-        return;
-    }
-    int index = array[low];
-    int i = low;
-    int j = high;
-    while (i < j)
-    {
-        while (i < j && array[j] >= index)
-        {
-            j--;
-        }
-        if (i < j)
-        {
-            array[i] = array[j];
-            i++;
-        }
-        while (i < j && array[i] < index)
-        {
-            i++;
-        }
-        if (i < j)
-        {
-            array[j] = array[i];
-            j--;
-        }
-    }
-    array[i] = index;
-    sortMe(array, low, i - 1);
-    sortMe(array, i + 1, high);
+	int max = arr[0];
+	int base = 1;
+
+	for (int i = 0; i < n; i++)
+	{
+		if (arr[i] > max)
+		{
+			max = arr[i];
+		}
+	}
+	int *tmpArr = new int[n];
+	while (max / base > 0)
+	{
+		int bucket[10] = {0};
+		for (int i = 0; i < n; i++)
+		{
+			bucket[arr[i] / base % 10]++;
+		}
+		for (int i = 1; i < 10; i++)
+		{
+			bucket[i] += bucket[i - 1];
+		}
+		for (int i = n - 1; i >= 0; i--)
+		{
+			tmpArr[bucket[arr[i] / base % 10] - 1] = arr[i];
+			bucket[arr[i] / base % 10]--;
+		}
+		for (int i = 0; i < n; i++)
+		{
+			arr[i] = tmpArr[i];
+		}
+		base *= 10;
+	}
+	delete tmpArr;
 }
 
-
-void sort(int* array, int count)
-{
-    sortMe(array, 0, count - 1);
-}
 ```
-![](https://img-blog.csdnimg.cn/img_convert/33ec37ddc4c804056a2411ffd7673ab6.png)
+![image](https://img-blog.csdnimg.cn/img_convert/8d3cc4225f0e4ea2e71af16dfa1f7456.png)
 # 17. C#
+开发工具：[下载Visual Studio](https://cxyxy.blog.csdn.net/article/details/128722639)
 ```csharp
-private static void Sort(int[] array)
-{
-    SortMe(array, 0, array.Length - 1);
-}
-private static void SortMe(int[] array, int low, int high)
-{
-    if (low >= high)
-    {
-        return;
-    }
-    int index = array[low];
-    int i = low;
-    int j = high;
-    while (i < j)
-    {
-        while (i < j && array[j] >= index)
+public static void Sort(int[] array, int bucketNum = 10)
         {
-            j--;
+            int maxLength = MaxLength(array);
+            int[,] bucket = new int[bucketNum, array.Length + 1];
+            for (int i = 0; i < maxLength; i++)
+            {
+                foreach (var num in array)
+                {
+                    int bit = (int)(num / Math.Pow(10, i) % 10);
+                    bucket[bit, ++bucket[bit, 0]] = num;
+                }
+                for (int count = 0, j = 0; j < bucketNum; j++)
+                {
+                    for (int k = 1; k <= bucket[j, 0]; k++)
+                    {
+                        array[count++] = bucket[j, k];
+                    }
+                }
+                for (int j = 0; j < bucketNum; j++)
+                {
+                    bucket[j, 0] = 0;
+                }
+            }
         }
-        if (i < j)
+
+        private static int MaxLength(int[] array)
         {
-            array[i] = array[j];
-            i++;
+            if (array.Length == 0) return 0;
+            int max = array[0];
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] > max) max = array[i];
+            }
+            int count = 0;
+            while (max != 0)
+            {
+                max /= 10;
+                count++;
+            }
+            return count;
         }
-        while (i < j && array[i] < index)
-        {
-            i++;
-        }
-        if (i < j)
-        {
-            array[j] = array[i];
-            j--;
-        }
-    }
-    array[i] = index;
-    SortMe(array, low, i - 1);
-    SortMe(array, i + 1, high);
-}
 ```
-![](https://img-blog.csdnimg.cn/img_convert/5845e6642e5080a8d0fbee41a3db523a.png)
+![image](https://img-blog.csdnimg.cn/img_convert/2375ab26d2116bd0ab747ae346ec40f8.png)
 
 # 关于
 厦门大学计算机专业|华为八年高级工程师   
