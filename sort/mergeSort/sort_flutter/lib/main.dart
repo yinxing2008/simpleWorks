@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: '冒泡排序 - 蓝不蓝编程'),
+      home: const MyHomePage(title: '归并排序 - 蓝不蓝编程'),
     );
   }
 }

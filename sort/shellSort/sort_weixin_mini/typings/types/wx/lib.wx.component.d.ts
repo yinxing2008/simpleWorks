@@ -318,7 +318,7 @@ declare namespace WechatMiniprogram.Component {
     }
 
     interface TriggerEventOption {
-        /** 事件是否冒泡
+        /** 事件是否希尔
          *
          * 默认值： `false`
          */

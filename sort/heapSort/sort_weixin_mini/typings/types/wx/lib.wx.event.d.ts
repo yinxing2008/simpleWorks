@@ -44,7 +44,7 @@ declare namespace WechatMiniprogram {
         type: string
         /** 页面打开到触发事件所经过的毫秒数 */
         timeStamp: number
-        /** 事件冒泡路径上所有由 `mark:` 开头的自定义属性组成的集合 */
+        /** 事件堆路径上所有由 `mark:` 开头的自定义属性组成的集合 */
         mark?: Mark
         /** 触发事件的源组件 */
         target: Target<TargetDataset>
@@ -114,7 +114,7 @@ declare namespace WechatMiniprogram {
         Mark extends IAnyObject = IAnyObject,
         TargetDataset extends IAnyObject = IAnyObject
     > extends Touch<never, TouchCanvasDetail, Mark, never, TargetDataset> {
-        // canvas 中的触摸事件不可冒泡，所以没有 currentTarget。
+        // canvas 中的触摸事件不可堆，所以没有 currentTarget。
         currentTarget: never
     }
 

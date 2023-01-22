@@ -30,6 +30,9 @@
       <excludeFolder url="file://$MODULE_DIR$/shellSort/sort_flutter/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/shellSort/sort_flutter/build" />
       <excludeFolder url="file://$MODULE_DIR$/shellSort/sort_flutter/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/radixSort/sort_flutter/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/radixSort/sort_flutter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/radixSort/sort_flutter/.pub" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -3,7 +3,7 @@
 		{
 			"path": "pages/lblbc_sort",
 			"style": {
-				"navigationBarTitleText": "冒泡排序 - 蓝不蓝编程"
+				"navigationBarTitleText": "堆排序 - 蓝不蓝编程"
 			}
 		}
 	],
