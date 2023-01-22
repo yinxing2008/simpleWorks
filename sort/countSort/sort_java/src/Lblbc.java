@@ -41,7 +41,6 @@ public class Lblbc {
                 array[index] = i + min;
             }
         }
-        int  xxx = 0;
     }
 
     private static void printArray(int[] array) {
