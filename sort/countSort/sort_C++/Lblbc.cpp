@@ -44,6 +44,7 @@ void sort(int *array, int count)
 			array[index] = i + min;
 		}
 	}
+	delete[] counting;
 }
 
 int main()
