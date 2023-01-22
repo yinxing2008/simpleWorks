@@ -1,307 +1,355 @@
+
 # 开源地址
-[https://gitee.com/lblbc/simple-works/tree/master/sort/bubbleSort](https://gitee.com/lblbc/simple-works/tree/master/sort/bubbleSort)
-![](https://img-blog.csdnimg.cn/0f4bbd4151df49a480693feacc0a0edf.png)
-![](https://img-blog.csdnimg.cn/a9c8b44b3a0f4ce7b0facb00c07bd727.png)
+[https://gitee.com/lblbc/simple-works/tree/master/sort/](https://gitee.com/lblbc/simple-works/tree/master/sort/)  
+> 覆盖语言：C、C++、C#、Java、Kotlin、Dart、Go、JavaScript(JS)、TypeScript(TS)、ArkTS、swift、PHP。  
+> 覆盖平台：安卓(Java、Kotlin)、iOS(SwiftUI)、Flutter(Dart)、Window桌面(C#)、前端(微信小程序、uni-app、vue)、后端（Java、Kotlin、NodeJS、Python、PHP、Go、C、C++）、鸿蒙  
+
+![](https://img-blog.csdnimg.cn/f7ba5b3299a24d338b8a71eb8cbd99b7.png)
+![image](https://img-blog.csdnimg.cn/img_convert/38c89e2baadeed40e6c5353768ae6cf0.png)
 # 1. 安卓Java版
 开发工具：[下载Android Studio](https://cxyxy.blog.csdn.net/article/details/107098873)
 ```java
-private void sort(int[] array) {
-    for (int i = 0; i < array.length - 1; i++) {
-        for (int j = 0; j < array.length - 1 - i; j++) {
-            if (array[j] > array[j + 1]) {
-                int tmp = array[j + 1];
-                array[j + 1] = array[j];
-                array[j] = tmp;
+
+    private static void sort(int[] array) {
+        for (int gap = array.length / 2; gap > 0; gap /= 2) {
+            for (int i = gap; i < array.length; i++) {
+                int j = i;
+                int tmp = array[j];
+                if (array[j] < array[j - gap]) {
+                    while (j - gap >= 0 && tmp < array[j - gap]) {
+                        array[j] = array[j - gap];
+                        j -= gap;
+                    }
+                    array[j] = tmp;
+                }
             }
         }
     }
-}
 ```
-![](https://img-blog.csdnimg.cn/8933c64289ad449aba669b79b201d793.png)
+![image](https://img-blog.csdnimg.cn/img_convert/8a816baa9ad1e0cbd5bd0f503cd38601.png)
+
 # 2. 安卓Kotlin版
 开发工具：[下载Android Studio](https://cxyxy.blog.csdn.net/article/details/107098873)
 ```kotlin
+
 private fun sort(array: IntArray) {
-    for (i in 0 until array.size - 1) {
-        for (j in 0 until array.size - 1 - i) {
-            if (array[j] > array[j + 1]) {
-                val tmp = array[j + 1]
-                array[j + 1] = array[j]
+    var gap = array.size / 2
+    while (gap > 0) {
+        for (i in gap until array.size) {
+            var j = i
+            val tmp = array[j]
+            if (array[j] < array[j - gap]) {
+                while (j - gap >= 0 && tmp < array[j - gap]) {
+                    array[j] = array[j - gap]
+                    j -= gap
+                }
                 array[j] = tmp
             }
         }
+        gap /= 2
     }
 }
 ```
-![](https://img-blog.csdnimg.cn/7318e42bbfc846ecbe091b49ac8af54a.png)
+![image](https://img-blog.csdnimg.cn/img_convert/f3a5f272743f38ec5f3d8e6ec4940a02.png)
+
 # 3. NodeJS
 开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
 ```js
+
 function sort() {
   let array = [2, 1, 5, 4, 3]
-  for (let i = 0; i < array.length - 1; i++) {
-    for (let j = 0; j < array.length - 1 - i; j++) {
-      if (array[j] > array[j + 1]) {
-        let tmp = array[j + 1]
-        array[j + 1] = array[j]
+  for (let gap = Math.floor(array.length / 2); gap > 0; gap /= 2) {
+    for (let i = gap; i < array.length; i++) {
+      var j = i
+      var tmp = array[j]
+      if (array[j] < array[j - gap]) {
+        while (j - gap >= 0 && tmp < array[j - gap]) {
+          array[j] = array[j - gap]
+          j -= gap
+        }
         array[j] = tmp
       }
     }
   }
-  return convertToStr(array)
 }
+
 ```
-![](https://img-blog.csdnimg.cn/77e20daedf8b4101aa479bb82ac4389c.png)
+![image](https://img-blog.csdnimg.cn/img_convert/f92c98533aaf6264fdaf8227f94de76b.png)
+
 # 4. Php
 开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
 ```php
-public function sort()
-{
-    $array = [2, 1, 5, 4, 3];
-    for ($i = 0; $i < count($array) -1; $i++) {
-        for ($j = 0; $j < count($array) -1 -$i; $j++) {
-            if ($array[$j] > $array[$j + 1]) {
-                $tmp = $array[$j];
-                $array[$j] = $array[$j + 1];
-                $array[$j + 1] = $tmp;
+ public function sort()
+    {
+        $arr = [2, 1, 5, 4, 3];
+        $length = count($arr);
+        $plus = floor($length / 2);
+        while ($plus > 0) {
+            for ($i = 1; $i <= $plus; $i++) {
+                for ($j = $plus; $j < $length / $plus; $j += $plus) {
+                    $tmp = $arr[$j];
+                    for ($k = $j - $plus; $k >= 0; $k -= $plus) {
+                        if ($tmp < $arr[$k]) {
+                            $arr[$k + $plus] = $arr[$k];
+                            $arr[$k] = $tmp;
+                        }
+                    }
+                }
             }
+            $plus = floor($plus / 2);
         }
+        return var_dump($arr);
     }
-    return var_dump($array);
-}
 ```
-![](https://img-blog.csdnimg.cn/5379e82b4783477584934bec16d9fe12.png)
+![image](https://img-blog.csdnimg.cn/img_convert/749b42523743051e6bb61f899664e4e8.png)
+
 # 5. Python
 开发工具：[下载PyCharm](https://cxyxy.blog.csdn.net/article/details/128722649)
 ```python
+
 array = [2, 1, 5, 4, 3]
+
+
 def sort():
-    count = len(array)
-    for i in range(count):
-        for j in range(0, count - i - 1):
-            if array[j] > array[j + 1]:
-                array[j], array[j + 1] = array[j + 1], array[j]
-
+    n = len(array)
+    gap = int(n / 2)
+    while gap > 0:
+        for i in range(gap, n):
+            temp = array[i]
+            j = i
+            while j >= gap and array[j - gap] > temp:
+                array[j] = array[j - gap]
+                j -= gap
+            array[j] = temp
+        gap = int(gap / 2)
 ```
-![](https://img-blog.csdnimg.cn/05cc456c70744eda834559430b2406b3.png)
-
+![image](https://img-blog.csdnimg.cn/img_convert/5c9aa2875387231270deb615fea84aec.png)
 # 6. Swift(SwiftUI版)
 开发工具：XCode(mac电脑自带)
 ```swift
 var array = [2, 1, 5, 4, 3]
+
 func sort() {
-    for i in 0...array.count-2 {
-        for j in 0...array.count-2-i {
-            if (array[j] > array[j + 1]) {
-                let tmp = array[j + 1];
-                array[j + 1] = array[j];
-                array[j] = tmp;
+    var gap = array.count / 2
+    while gap > 0 {
+        for i in gap ..< array.count {
+            var formerIndex = i - gap
+            while formerIndex >= 0 {
+                if array[formerIndex] > array[formerIndex+gap] {
+                    array.swapAt(formerIndex, formerIndex+gap)
+                }
+                formerIndex -= gap
             }
         }
+        gap = gap / 2
     }
 }
 ```
-![](https://img-blog.csdnimg.cn/215afce0276848bca3da798274928148.png)
+![image](https://img-blog.csdnimg.cn/img_convert/6c8c812dd388572daa842d5fcb794e8a.png)
 
 # 7. uni-app
 开发工具：[下载HBuilderX](https://cxyxy.blog.csdn.net/article/details/128722661)
 ```js
 sort() {
-  let array = [2, 1, 5, 4, 3]
-  for (let i = 0; i < array.length - 1; i++) {
-	for (let j = 0; j < array.length - 1 - i; j++) {
-	  if (array[j] > array[j + 1]) {
-		let tmp = array[j + 1]
-		array[j + 1] = array[j]
-		array[j] = tmp
-	  }
+	let array = [2, 1, 5, 4, 3]
+	for (let gap = Math.floor(array.length / 2); gap > 0; gap /= 2) {
+		for (let i = gap; i < array.length; i++) {
+			var j = i
+			var tmp = array[j]
+			if (array[j] < array[j - gap]) {
+				while (j - gap >= 0 && tmp < array[j - gap]) {
+					array[j] = array[j - gap]
+					j -= gap
+				}
+				array[j] = tmp
+			}
+		}
 	}
-  }
-}
+},
 ```
-![](https://img-blog.csdnimg.cn/e6669cde0e73441581d4f230d3803d12.png)
+![image](https://img-blog.csdnimg.cn/img_convert/aae8f6f62c507b41cde158631c7286c7.png)
 
 # 8. vue
 开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
 ```js
 sort() {
-  let array = [2, 1, 5, 4, 3]
-  for (let i = 0; i < array.length - 1; i++) {
-	for (let j = 0; j < array.length - 1 - i; j++) {
-	  if (array[j] > array[j + 1]) {
-		let tmp = array[j + 1]
-		array[j + 1] = array[j]
-		array[j] = tmp
-	  }
-	}
-  }
-}
+      let array = [2, 1, 5, 4, 3]
+      for (let gap = Math.floor(array.length / 2); gap > 0; gap /= 2) {
+        for (let i = gap; i < array.length; i++) {
+          var j = i
+          var tmp = array[j]
+          if (array[j] < array[j - gap]) {
+            while (j - gap >= 0 && tmp < array[j - gap]) {
+              array[j] = array[j - gap]
+              j -= gap
+            }
+            array[j] = tmp
+          }
+        }
+      }
+    }
 ```
-![](https://img-blog.csdnimg.cn/346179da77a14c0faa891c6f8f6bd38e.png)
+![](https://img-blog.csdnimg.cn/img_convert/63fb070e00f53d269fa5402b3ac7b8c8.png)
 
 # 9. 微信小程序
 开发工具：[下载微信开发者工具](https://cxyxy.blog.csdn.net/article/details/128732108)
 ```js
 sort() {
-  let array = [2, 1, 5, 4, 3]
-  for (let i = 0; i < array.length - 1; i++) {
-    for (let j = 0; j < array.length - 1 - i; j++) {
-      if (array[j] > array[j + 1]) {
-        let tmp = array[j + 1];
-        array[j + 1] = array[j];
-        array[j] = tmp;
+    let array = [2, 1, 5, 4, 3]
+    for (let gap = Math.floor(array.length / 2); gap > 0; gap /= 2) {
+      for (let i = gap; i < array.length; i++) {
+        var j = i
+        var tmp = array[j]
+        if (array[j] < array[j - gap]) {
+          while (j - gap >= 0 && tmp < array[j - gap]) {
+            array[j] = array[j - gap]
+            j -= gap
+          }
+          array[j] = tmp
+        }
       }
     }
-  }
-}
+  },
 ```
-![](https://img-blog.csdnimg.cn/3259e905924b4b9f95e4ded0a54efa05.png)
+![image](https://img-blog.csdnimg.cn/img_convert/b5a21804aa4207db15464f66e939934c.png)
 
 # 10. 鸿蒙(ArkTS)
-开发工具：[下载DevEco Studio]()
+开发工具：[下载DevEco Studio](https://developer.harmonyos.com/cn/develop/deveco-studio)
 ```js
-sort() {
-  let array = this.array
-  for (let i = 0; i < array.length - 1; i++) {
-    for (let j = 0; j < array.length - 1 - i; j++) {
-      if (array[j] > array[j + 1]) {
-        let tmp = array[j + 1]
-        array[j + 1] = array[j]
-        array[j] = tmp
+  sort() {
+    let array = [2, 1, 5, 4, 3]
+    for (let gap = Math.floor(array.length / 2); gap > 0; gap /= 2) {
+      for (let i = gap; i < array.length; i++) {
+        var j = i
+        var tmp = array[j]
+        if (array[j] < array[j - gap]) {
+          while (j - gap >= 0 && tmp < array[j - gap]) {
+            array[j] = array[j - gap]
+            j -= gap
+          }
+          array[j] = tmp
+        }
       }
     }
   }
-  this.array = array
-}
 ```
-![](https://img-blog.csdnimg.cn/7185b139a03d4098bbb8eef7ab402178.png)
-
-
+![image](https://img-blog.csdnimg.cn/img_convert/6d192a219105cdd43ca45aa288281214.png)
 # 11. Go语言
 开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
 ```go
+
 var array = []int{2, 1, 5, 4, 3}
 
 func sort() {
-	for i := 0; i < len(array)-1; i++ {
-		for j := 0; j < len(array)-1-i; j++ {
-			if array[j] > array[j+1] {
-				tmp := array[j+1]
-				array[j+1] = array[j]
+	for gap := len(array) / 2; gap > 0; gap /= 2 {
+		for i := gap; i < len(array); i++ {
+			var j = i
+			var tmp = array[j]
+			if array[j] < array[j-gap] {
+				for {
+					array[j] = array[j-gap]
+					j -= gap
+					if j-gap < 0 || tmp >= array[j-gap] {
+						break
+					}
+				}
+
 				array[j] = tmp
 			}
 		}
 	}
 }
 ```
-![](https://img-blog.csdnimg.cn/41a05ad07edf4effb977fcd317ecd9b8.png)
+![image](https://img-blog.csdnimg.cn/img_convert/c85caab1cd20b6dd525fda166920264d.png)
 # 12. Java
 开发工具：[下载IntelliJ IDEA](https://cxyxy.blog.csdn.net/article/details/128722658)
 ```java
-private static void sort(int[] array) {
-    for (int i = 0; i < array.length - 1; i++) {
-        for (int j = 0; j < array.length - 1 - i; j++) {
-            if (array[j] > array[j + 1]) {
-                int tmp = array[j + 1];
-                array[j + 1] = array[j];
-                array[j] = tmp;
+
+    private static void sort(int[] array) {
+        for (int gap = array.length / 2; gap > 0; gap /= 2) {
+            for (int i = gap; i < array.length; i++) {
+                int j = i;
+                int tmp = array[j];
+                if (array[j] < array[j - gap]) {
+                    while (j - gap >= 0 && tmp < array[j - gap]) {
+                        array[j] = array[j - gap];
+                        j -= gap;
+                    }
+                    array[j] = tmp;
+                }
             }
         }
     }
-}
-
 ```
-![](https://img-blog.csdnimg.cn/e22f6734c8554077bab6467ddee75d97.png)
+![image](https://img-blog.csdnimg.cn/img_convert/40cb29251cb320301163cdd7f171276e.png)
 
 # 13. Kotlin
 开发工具：[下载IntelliJ IDEA](https://cxyxy.blog.csdn.net/article/details/128722658)
 ```kotlin
+
 private fun sort(array: IntArray) {
-    for (i in 0 until array.size - 1) {
-        for (j in 0 until array.size - 1 - i) {
-            if (array[j] > array[j + 1]) {
-                val tmp = array[j + 1]
-                array[j + 1] = array[j]
+    var gap = array.size / 2
+    while (gap > 0) {
+        for (i in gap until array.size) {
+            var j = i
+            val tmp = array[j]
+            if (array[j] < array[j - gap]) {
+                while (j - gap >= 0 && tmp < array[j - gap]) {
+                    array[j] = array[j - gap]
+                    j -= gap
+                }
                 array[j] = tmp
             }
         }
+        gap /= 2
     }
 }
 ```
-![](https://img-blog.csdnimg.cn/ee6d1c9c854b4916b9504102e5e4660d.png)
+![image](https://img-blog.csdnimg.cn/img_convert/206003262b01d127af1db0a03741985b.png)
 
 # 14. Flutter
 开发工具：[下载IntelliJ IDEA](https://cxyxy.blog.csdn.net/article/details/128722658)
 ```dart
-void sort(List<int> list) {
-  for (int i = 0; i < list.length - 1; i++) {
-    for (int j = 0; j < list.length - 1 - i; j++) {
-      if (list[j] > list[j + 1]) {
-        var tmp = list[j + 1];
-        list[j + 1] = list[j];
-        list[j] = tmp;
+void sort(List<int> array) {
+  int gap = array.length ~/ 2;
+  while (gap > 0) {
+    for (int i = gap; i < array.length; i++) {
+      int j = i;
+      int tmp = array[j];
+      if (array[j] < array[j - gap]) {
+        while (j - gap >= 0 && tmp < array[j - gap]) {
+          array[j] = array[j - gap];
+          j -= gap;
+        }
+        array[j] = tmp;
       }
     }
+    gap = gap ~/ 2;
   }
 }
+
 ```
-![](https://img-blog.csdnimg.cn/9b88565c8e6346d8941a06a4262d3900.png)
+![](https://img-blog.csdnimg.cn/img_convert/39afcc60a45a08b9155fdb259fa8c4cc.png)
 
 # 15. C语言
 开发工具：[下载Visual Studio](https://cxyxy.blog.csdn.net/article/details/128722639)
 ```c
+
 void sort(int* array, int count)
 {
-	for (int i = 0; i < count - 1; i++)
-	{
-		for (int j = 0; j < count - 1 - i; j++)
-		{
-			if (array[j + 1] < array[j])
-			{
-				int tmp = array[j];
-				array[j] = array[j + 1];
-				array[j + 1] = tmp;
-			}
-		}
-	}
-}
-```
-![](https://img-blog.csdnimg.cn/2ae2cc049add4d4ca456b666c3fddfd2.png)
-
-# 16. C++
-开发工具：[下载Visual Studio](https://cxyxy.blog.csdn.net/article/details/128722639)
-```cpp
-void sort(int* array, int count)
-{
-	for (int i = 0; i < count - 1; i++)
-	{
-		for (int j = 0; j < count - 1 - i; j++)
-		{
-			if (array[j + 1] < array[j])
-			{
-				int tmp = array[j];
-				array[j] = array[j + 1];
-				array[j + 1] = tmp;
-			}
-		}
-	}
-}
-```
-![](https://img-blog.csdnimg.cn/a41a6308765c4eab85cde800a8fa62b5.png)
-
-# 17. C#
-开发工具：[下载Visual Studio](https://cxyxy.blog.csdn.net/article/details/128722639)
-```csharp
-private void Sort(int[] array)
-{
-    for (int i = 0; i < array.Length - 1; i++)
+    for (int gap = count / 2; gap > 0; gap /= 2)
     {
-        for (int j = 0; j < array.Length - 1 - i; j++)
+        for (int i = gap; i < count; i++)
         {
-            if (array[j] > array[j + 1])
+            int j = i;
+            int tmp = array[j];
+            if (array[j] < array[j - gap])
             {
-                int tmp = array[j + 1];
-                array[j + 1] = array[j];
+                while (j - gap >= 0 && tmp < array[j - gap])
+                {
+                    array[j] = array[j - gap];
+                    j -= gap;
+                }
                 array[j] = tmp;
             }
         }
@@ -309,7 +357,67 @@ private void Sort(int[] array)
 }
 
 ```
-![](https://img-blog.csdnimg.cn/665bda9b45b349f9923dae18657620a9.png)
+![image](https://img-blog.csdnimg.cn/img_convert/92f1f1da2dc8392bf15e185e0cb33b89.png)
+
+# 16. C++
+开发工具：[下载Visual Studio](https://cxyxy.blog.csdn.net/article/details/128722639)
+```cpp
+
+void sort(int* array, int count)
+{
+    for (int gap = count / 2; gap > 0; gap /= 2)
+    {
+        for (int i = gap; i < count; i++)
+        {
+            int j = i;
+            int tmp = array[j];
+            if (array[j] < array[j - gap])
+            {
+                while (j - gap >= 0 && tmp < array[j - gap])
+                {
+                    array[j] = array[j - gap];
+                    j -= gap;
+                }
+                array[j] = tmp;
+            }
+        }
+    }
+}
+
+```
+![image](https://img-blog.csdnimg.cn/img_convert/8d3cc4225f0e4ea2e71af16dfa1f7456.png)
+# 17. C#
+开发工具：[下载Visual Studio](https://cxyxy.blog.csdn.net/article/details/128722639)
+```csharp
+
+        private static void Sort(int[] array)
+        {
+            for (int gap = array.Length / 2; gap > 0; gap /= 2)
+            {
+                for (int i = gap; i < array.Length; i++)
+                {
+                    int j = i;
+                    int tmp = array[j];
+                    if (array[j] < array[j - gap])
+                    {
+                        while (j - gap >= 0 && tmp < array[j - gap])
+                        {
+                            array[j] = array[j - gap];
+                            j -= gap;
+                        }
+                        array[j] = tmp;
+                    }
+                }
+            }
+        }
+```
+![image](https://img-blog.csdnimg.cn/img_convert/2375ab26d2116bd0ab747ae346ec40f8.png)
+
+# 关于
+厦门大学计算机专业|华为八年高级工程师   
+专注《零基础学编程系列》  http://lblbc.cn/blog  
+包含：Java | 安卓 | 前端 | Flutter | iOS | 小程序 | 鸿蒙  
+公众号：蓝不蓝编程
 
 # 快速上手
 ## 1.更新依赖
@@ -323,9 +431,4 @@ php think run -p 8080
 ```
 ## 3.浏览器访问
 http://localhost:8080/sort
-# 关于
-厦门大学计算机专业|华为八年高级工程师   
-专注《零基础学编程系列》  http://lblbc.cn/blog  
-包含：Java | 安卓 | 前端 | Flutter | iOS | 小程序 | 鸿蒙  
-公众号：蓝不蓝编程
 
