@@ -4,6 +4,7 @@
 /// 公众号：蓝不蓝编程
 
 #include<stdio.h>
+#include<stdlib.h>
 
 void printArray(int* array, int count)
 {
@@ -32,6 +33,7 @@ void sort(int array[], int count)
 
 	int bucketLen = max - min + 1;
 	int* bucket = (int*)malloc(sizeof(int) * bucketLen);
+	bucket[0] = 0;
 	for (int i = 0; i < bucketLen; i++)
 	{
 		bucket[i] = 0;
