@@ -49,7 +49,7 @@ void sort(int *arr, int n)
 		}
 		base *= 10;
 	}
-	free(tmpArr);
+	delete tmpArr;
 }
 
 int main()
