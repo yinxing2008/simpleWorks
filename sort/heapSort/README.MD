@@ -1,616 +1,642 @@
-# 开源地址
-[https://gitee.com/lblbc/simple-works/tree/master/sort/](https://gitee.com/lblbc/simple-works/tree/master/sort/)
-覆盖语言：C、C++、C#、Java、Kotlin、Dart、Go、JavaScript(JS)、TypeScript(TS)、ArkTS、swift、PHP。
-覆盖平台：安卓(Java、Kotlin)、iOS(SwiftUI)、Flutter(Dart)、Window桌面(C#)、前端(微信小程序、uni-app、vue)、后端（Java、Kotlin、NodeJS、Python、PHP、Go、C、C++）、鸿蒙
-![](https://img-blog.csdnimg.cn/94c1c52fe64f4e0b879829679e535cf8.png)
 
-![image](https://img-blog.csdnimg.cn/img_convert/965af557d5b8cc11b30f1dfd9f67eb90.png)
+# 开源地址
+[https://gitee.com/lblbc/simple-works/tree/master/sort/](https://gitee.com/lblbc/simple-works/tree/master/sort/)  
+> 覆盖语言：C、C++、C#、Java、Kotlin、Dart、Go、JavaScript(JS)、TypeScript(TS)、ArkTS、swift、PHP。  
+> 覆盖平台：安卓(Java、Kotlin)、iOS(SwiftUI)、Flutter(Dart)、Window桌面(C#)、前端(微信小程序、uni-app、vue)、后端（Java、Kotlin、NodeJS、Python、PHP、Go、C、C++）、鸿蒙  
+
+![](https://img-blog.csdnimg.cn/f7ba5b3299a24d338b8a71eb8cbd99b7.png)
+![image](https://img-blog.csdnimg.cn/img_convert/38c89e2baadeed40e6c5353768ae6cf0.png)
 # 1. 安卓Java版
+开发工具：[下载Android Studio](https://cxyxy.blog.csdn.net/article/details/107098873)
 ```java
-private static void sort(int[] array) {
-    sortMe(array, 0, array.length - 1);
+private void sort(int[] array) {
+    for (int i = array.length / 2 - 1; i >= 0; i--) {
+        adjustHeap(array, i, array.length);
+    }
+    for (int j = array.length - 1; j > 0; j--) {
+        int temp = array[0];
+        array[0] = array[j];
+        array[j] = temp;
+        adjustHeap(array, 0, j);
+    }
 }
 
-private static void sortMe(int[] array, int low, int high) {
-    if (low >= high) {
-        return;
-    }
-    int pivot = array[low];
-    int l = low;
-    int r = high;
-    int tmp;
-    while (l < r) {
-        while (l < r && array[r] >= pivot) {
-            r--;
+private void adjustHeap(int[] array, int i, int length) {
+    int tmp = array[i];
+    for (int j = i * 2 + 1; j < length; j = j * 2 + 1) {
+        if (j + 1 < length && array[j] < array[j + 1]) {
+            j++;
         }
-        while (l < r && array[l] <= pivot) {
-            l++;
-        }
-        if (l < r) {
-            tmp = array[l];
-            array[l] = array[r];
-            array[r] = tmp;
+        if (array[j] > tmp) {
+            array[i] = array[j];
+            i = j;
+        } else {
+            break;
         }
     }
-    array[low] = array[l];
-    array[l] = pivot;
-    if (low < l) {
-        sortMe(array, low, l - 1);
-    }
-    if (r < high) {
-        sortMe(array, r + 1, high);
-    }
+    array[i] = tmp;
 }
 ```
-![](https://img-blog.csdnimg.cn/img_convert/dd8fdfe899ee0f7c57b5726a27ce8989.png)
+![image](https://img-blog.csdnimg.cn/img_convert/8a816baa9ad1e0cbd5bd0f503cd38601.png)
 
 # 2. 安卓Kotlin版
+开发工具：[下载Android Studio](https://cxyxy.blog.csdn.net/article/details/107098873)
 ```kotlin
 private fun sort(array: IntArray) {
-    sortMe(array, 0, array.size - 1)
+    for (i in array.size / 2 - 1 downTo 0) {
+        adjustHeap(array, i, array.size)
+    }
+    for (j in array.size - 1 downTo 1) {
+        val temp = array[0]
+        array[0] = array[j]
+        array[j] = temp
+        adjustHeap(array, 0, j)
+    }
 }
 
-private fun sortMe(array: IntArray, low: Int, high: Int) {
-    if (low >= high) {
-        return
-    }
-    val pivot = array[low]
-    var l = low
-    var r = high
-    var tmp: Int
-    while (l < r) {
-        while (l < r && array[r] >= pivot) {
-            r--
+private fun adjustHeap(array: IntArray, _index: Int, length: Int) {
+    var index = _index
+    val tmp = array[index]
+    var j = index * 2 + 1
+    while (j < length) {
+        if (j + 1 < length && array[j] < array[j + 1]) {
+            j++
         }
-        while (l < r && array[l] <= pivot) {
-            l++
+        if (array[j] > tmp) {
+            array[index] = array[j]
+            index = j
+        } else {
+            break
         }
-        if (l < r) {
-            tmp = array[l]
-            array[l] = array[r]
-            array[r] = tmp
-        }
+        j = j * 2 + 1
     }
-    array[low] = array[l]
-    array[l] = pivot
-    if (low < l) {
-        sortMe(array, low, l - 1)
-    }
-    if (r < high) {
-        sortMe(array, r + 1, high)
-    }
+    array[index] = tmp
 }
 ```
-![](https://img-blog.csdnimg.cn/img_convert/c18ef8d72a0d8533cfcf56e1381d0e4d.png)
+![image](https://img-blog.csdnimg.cn/img_convert/f3a5f272743f38ec5f3d8e6ec4940a02.png)
 
 # 3. NodeJS
+开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
 ```js
 function sort() {
-  sortMe(0, array.length - 1);
-  return convertToStr(array);
+  let array = [2, 1, 5, 4, 3]
+  for (var i = Math.floor(array.length / 2) - 1; i >= 0; i--) {
+    adjustHeap(array, i, array.length)
+  }
+  for (var j = array.length - 1; j > 0; j--) {
+    var temp = array[0]
+    array[0] = array[j]
+    array[j] = temp
+    adjustHeap(array, 0, j)
+  }
+  return convertToStr(array)
 }
-
-function sortMe(slow, fast) {
-  let base = array[slow];
-  array[slow] = 0;
-  let left = slow;
-  let right = fast;
-  while (left < right) {
-
-    if (array[left] === 0) {
-      if (array[right] < base) {
-        array[left] = array[right];
-        array[right] = 0;
-        left = left + 1;
-      }
-      else {
-        right = right - 1;
-      }
-    } else if (array[right] === 0) {
-      if (array[left] >= base) {
-        array[right] = array[left];
-        array[left] = 0;
-        right = right - 1;
-      }
-      else {
-        left = left + 1;
-      }
+function adjustHeap(array, i, length) {
+  var tmp = array[i]
+  for (var j = i * 2 + 1; j < length; j = j * 2 + 1) {
+    if (j + 1 < length && array[j] < array[j + 1]) {
+      j++
+    }
+    if (array[j] > tmp) {
+      array[i] = array[j]
+      i = j
+    } else {
+      break
     }
   }
-  array[left] = base;
-  if ((left - 1) - slow > 0) {
-    sortMe(slow, left - 1);
-  }
-  if (fast - (right + 1) > 0) {
-    sortMe(right + 1, fast);
-  }
-  return
+  array[i] = tmp
 }
 ```
-![](https://img-blog.csdnimg.cn/62b76ce5e5ac44b281c9de3a9e99577b.png)
+![image](https://img-blog.csdnimg.cn/img_convert/f92c98533aaf6264fdaf8227f94de76b.png)
 
 # 4. Php
+开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
 ```php
 public function sort()
     {
         $array = [2, 1, 5, 4, 3];
-        $result = $this->sortMe($array);
-        return var_dump($result);
+        $len = count($array);
+        for ($i = floor($len / 2) - 1; $i >= 0; $i--) {
+            $this->adjustHeap($array, $i, $len);
+        }
+        for ($j = $len - 1; $j > 0; $j--) {
+            $this->swap($array, 0, $j);
+            $this->adjustHeap($array, 0, $j);
+        }
+        return var_dump($array);
     }
 
-    public function sortMe($arr)
+    private function adjustHeap(&$array, $i, $length)
     {
-        $length = count($arr);
-        if (!is_array($arr) || $length <= 1) {
-            return $arr;
-        }
-        $baseValue = $arr[0];
-        $leftArr = array();
-        $rightArr = array();
-        for ($i = 1; $i < $length; $i++) {
-            if ($arr[$i] < $baseValue) {
-                $leftArr[] = $arr[$i];
-            } else {
-                $rightArr[] = $arr[$i];
+        $tmp = $array[$i];
+        for ($k = 2 * $i + 1; $k < $length; $k = 2 * $k + 1) {
+            if ($k + 1 < $length && $array[$k] < $array[$k + 1]) {
+                $k++;
             }
+            if ($tmp < $array[$k]) {
+                $array[$i] = $array[$k];
+                $i = $k;
+            } else {
+                break;
+            }
+
         }
-        $leftArr = $this->sortMe($leftArr);
-        $rightArr = $this->sortMe($rightArr);
-        return array_merge($leftArr, array($baseValue), $rightArr);
+        $array[$i] = $tmp;
     }
 ```
-![](https://img-blog.csdnimg.cn/1b86b47fb80045afb0478cfe36a103b6.png)
+![image](https://img-blog.csdnimg.cn/img_convert/749b42523743051e6bb61f899664e4e8.png)
 
 # 5. Python
+开发工具：[下载PyCharm](https://cxyxy.blog.csdn.net/article/details/128722649)
 ```python
 array = [2, 1, 5, 4, 3]
 
 
-def sort(array, low, high):
-    if low >= high:
-        return array
-    i = low
-    j = high
-    pivot = array[low]
-    while i < j:
-        while i < j and array[j] > pivot:
-            j -= 1
-        array[i] = array[j]
-        while i < j and array[i] < pivot:
-            i += 1
-        array[j] = array[i]
-    array[j] = pivot
+def heap_sort(n, i):
+    largest = i
+    left = 2 * i + 1
+    right = 2 * i + 2
 
-    sort(array, low, j - 1)
-    sort(array, j + 1, high)
+    if left < n and array[i] < array[left]:
+        largest = left
 
-    return
+    if right < n and array[largest] < array[right]:
+        largest = right
+
+    if largest != i:
+        array[i], array[largest] = array[largest], array[i]  # 交换
+
+        heap_sort(n, largest)
+
+
+def sort():
+    n = len(array)
+
+    for i in range(n, -1, -1):
+        heap_sort(n, i)
+
+    for i in range(n - 1, 0, -1):
+        array[i], array[0] = array[0], array[i]
+        heap_sort(i, 0)
+
 ```
-![](https://img-blog.csdnimg.cn/f0f6b38ef4cc4e11afbb2abad6f2a03e.png)
+![image](https://img-blog.csdnimg.cn/img_convert/5c9aa2875387231270deb615fea84aec.png)
 # 6. Swift(SwiftUI版)
+开发工具：XCode(mac电脑自带)
 ```swift
 var array = [2, 1, 5, 4, 3]
 func sort() {
-    sortMe(array: &array, left: 0, right: array.count - 1)
+    var i = array.count / 2 - 1
+    
+    while i >= 0
+    {
+        adjustHeap(_startIndex:i, length:array.count);
+        i -= 1
+    }
+    
+    i = array.count - 1
+    while i > 0
+    {
+        let temp = array[0];
+        array[0] = array[i];
+        array[i] = temp;
+        adjustHeap(_startIndex: 0, length:i);
+        i -= 1
+    }
 }
 
-func sortMe(array: inout [Int], left: Int, right: Int) {
-    if right - left <= 0 {
-        return
-    }
+func adjustHeap( _startIndex:Int,  length:Int) {
+    var startIndex = _startIndex
+    let tmp = array[startIndex];
     
-    var flagIndex = left
-    let flagValue = array[left]
+    var j = startIndex * 2 + 1
     
-    for index in stride(from: left + 1, to: right + 1, by: 1) {
-        let value = array[index]
-        if value < flagValue {
-            array[flagIndex] = value
-            flagIndex += 1
-            array[index] = array[flagIndex]
-            array[flagIndex] = flagValue
+    while j < length
+    {
+        if (j + 1 < length && array[j] < array[j + 1]) {
+            j += 1;
         }
+        if (array[j] > tmp) {
+            array[startIndex] = array[j];
+            startIndex = j;
+        } else {
+            break;
+        }
+        j = j * 2 + 1
     }
     
-    sortMe(array: &array, left: left, right: flagIndex - 1)
-    sortMe(array: &array, left: flagIndex + 1, right: right)
+    array[startIndex] = tmp;
 }
 ```
-![](https://img-blog.csdnimg.cn/af6896d2a6ff4166bfd308335b0f749b.png)
+![image](https://img-blog.csdnimg.cn/img_convert/6c8c812dd388572daa842d5fcb794e8a.png)
 
 # 7. uni-app
+开发工具：[下载HBuilderX](https://cxyxy.blog.csdn.net/article/details/128722661)
 ```js
 sort() {
-	let array = this.array;
-	this.sortMe(array, 0, array.length - 1);
+	let array = [2, 1, 5, 4, 3]
+	for (var i = Math.floor(array.length / 2) - 1; i >= 0; i--) {
+		this.adjustHeap(array, i, array.length)
+	}
+	for (var j = array.length - 1; j > 0; j--) {
+		var temp = array[0]
+		array[0] = array[j]
+		array[j] = temp
+		this.adjustHeap(array, 0, j)
+	}
 	this.array = array
 	this.arrayStr = this.convertToStr(array)
 },
-sortMe(array: number[], low: number, high: number) {
-	if (low >= high) {
-		return;
-	}
-	var index = array[low];
-	var i = low;
-	var j = high;
-	while (i < j) {
-		while (i < j && array[j] >= index) {
-			j--;
+adjustHeap(array: number[], i: number, length: number) {
+	var tmp = array[i]
+	for (var j = i * 2 + 1; j < length; j = j * 2 + 1) {
+		if (j + 1 < length && array[j] < array[j + 1]) {
+			j++
 		}
-		if (i < j) {
-			array[i] = array[j];
-			i++;
-		}
-		while (i < j && array[i] < index) {
-			i++;
-		}
-		if (i < j) {
-			array[j] = array[i];
-			j--;
-		}
-	}
-	array[i] = index;
-	this.sortMe(array, low, i - 1);
-	this.sortMe(array, i + 1, high);
-},
-```
-![](https://img-blog.csdnimg.cn/img_convert/f53374e28b7d0841c8ebbb2de0ecd647.png)
-
-# 8. vue
-```js
-
-```
-![](https://img-blog.csdnimg.cn/1167456bbf824e729553a0e7dbd4c1ca.png)
-# 9. 微信小程序
-```js
-sort() {
-  let array = this.data.array;
-  this.sortMe(array, 0, array.length - 1);
-  this.setData({
-    array: array,
-    arrayStr: this.convertToStr(array),
-  })
-},
-sortMe(array: number[], low: number, high: number) {
-  if (low >= high) {
-    return;
-  }
-  var index = array[low];
-  var i = low;
-  var j = high;
-  while (i < j) {
-    while (i < j && array[j] >= index) {
-      j--;
-    }
-    if (i < j) {
-      array[i] = array[j];
-      i++;
-    }
-    while (i < j && array[i] < index) {
-      i++;
-    }
-    if (i < j) {
-      array[j] = array[i];
-      j--;
-    }
-  }
-  array[i] = index;
-  this.sortMe(array, low, i - 1);
-  this.sortMe(array, i + 1, high);
-},
-```
-![](https://img-blog.csdnimg.cn/img_convert/28ba1be7231483c6826a865c2bceea0d.png)
-
-# 10. 鸿蒙(ArkTS)
-```js
- sort() {
-    let array = this.array;
-    this.sortMe(array, 0, array.length - 1);
-    this.array = array
-  }
-
-  sortMe(array: number[], low: number, high: number) {
-    if (low >= high) {
-      return;
-    }
-    var index = array[low];
-    var i = low;
-    var j = high;
-    while (i < j) {
-      while (i < j && array[j] >= index) {
-        j--;
-      }
-      if (i < j) {
-        array[i] = array[j];
-        i++;
-      }
-      while (i < j && array[i] < index) {
-        i++;
-      }
-      if (i < j) {
-        array[j] = array[i];
-        j--;
-      }
-    }
-    array[i] = index;
-    this.sortMe(array, low, i - 1);
-    this.sortMe(array, i + 1, high);
-  }
-```
-![](https://img-blog.csdnimg.cn/11b4a3311b24416da4b7ca2077924a81.png)
-# 11. Go语言
-```go
-func sort(left int, right int, array *[5]int) {
-	l := left
-	r := right
-	pivot := array[(left+right)/2]
-	tmp := 0
-	for l < r {
-		for array[l] < pivot {
-			l++
-		}
-		for array[r] > pivot {
-			r--
-		}
-		if l >= r {
+		if (array[j] > tmp) {
+			array[i] = array[j]
+			i = j
+		} else {
 			break
 		}
-		tmp = array[l]
-		array[l] = array[r]
-		array[r] = tmp
-		if array[l] == pivot {
-			r--
-		}
-		if array[r] == pivot {
-			l++
-		}
 	}
-	if l == r {
-		l++
-		r--
-	}
-	if left < r {
-		sort(left, r, array)
-	}
-	if right > l {
-		sort(l, right, array)
-	}
+	array[i] = tmp
 }
 ```
-![](https://img-blog.csdnimg.cn/d39afaa953aa4a0f967f54072b8d9df0.png)
-# 12. Java
-```java
-private static void sort(int[] array) {
-    sortMe(array, 0, array.length - 1);
-}
+![image](https://img-blog.csdnimg.cn/img_convert/aae8f6f62c507b41cde158631c7286c7.png)
 
-public static void sortMe(int[] array, int low, int high) {
-    if (low >= high) {
-        return;
+# 8. vue
+开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
+```js
+sort() {
+  let array = [2, 1, 5, 4, 3]
+  for (var i = Math.floor(array.length / 2) - 1; i >= 0; i--) {
+    this.adjustHeap(array, i, array.length)
+  }
+  for (var j = array.length - 1; j > 0; j--) {
+    var temp = array[0]
+    array[0] = array[j]
+    array[j] = temp
+    this.adjustHeap(array, 0, j)
+  }
+  this.array = array
+  this.arrayStr = this.convertToStr(array)
+},
+adjustHeap(array: number[], i: number, length: number) {
+  var tmp = array[i]
+  for (var j = i * 2 + 1; j < length; j = j * 2 + 1) {
+    if (j + 1 < length && array[j] < array[j + 1]) {
+      j++
     }
-    int pivot = array[low];
-    int l = low;
-    int r = high;
-    int tmp;
-    while (l < r) {
-        while (l < r && array[r] >= pivot) {
-            r--;
-        }
-        while (l < r && array[l] <= pivot) {
-            l++;
-        }
-        if (l < r) {
-            tmp = array[l];
-            array[l] = array[r];
-            array[r] = tmp;
-        }
+    if (array[j] > tmp) {
+      array[i] = array[j]
+      i = j
+    } else {
+      break
     }
-    array[low] = array[l];
-    array[l] = pivot;
-    if (low < l) {
-        sortMe(array, low, l - 1);
-    }
-    if (r < high) {
-        sortMe(array, r + 1, high);
-    }
+  }
+  array[i] = tmp
 }
 ```
-![](https://img-blog.csdnimg.cn/img_convert/d0e1f96e0e5d0869ee9a72964fbd0ffa.png)
+![](https://img-blog.csdnimg.cn/img_convert/63fb070e00f53d269fa5402b3ac7b8c8.png)
 
-# 13. Kotlin
-```kotlin
-private fun sort(array: IntArray) {
-    sortMe(array, 0, array.size - 1)
-}
-
-fun sortMe(array: IntArray, low: Int, high: Int) {
-    if (low >= high) {
-        return
+# 9. 微信小程序
+开发工具：[下载微信开发者工具](https://cxyxy.blog.csdn.net/article/details/128732108)
+```js
+sort() {
+    let array = [2, 1, 5, 4, 3]
+    for (var i = Math.floor(array.length / 2) - 1; i >= 0; i--) {
+      this.adjustHeap(array, i, array.length)
     }
-    val pivot = array[low]
-    var l = low
-    var r = high
-    var tmp: Int
-    while (l < r) {
-        while (l < r && array[r] >= pivot) {
-            r--
-        }
-        while (l < r && array[l] <= pivot) {
-            l++
-        }
-        if (l < r) {
-            tmp = array[l]
-            array[l] = array[r]
-            array[r] = tmp
-        }
+    for (var j = array.length - 1; j > 0; j--) {
+      var temp = array[0]
+      array[0] = array[j]
+      array[j] = temp
+      this.adjustHeap(array, 0, j)
     }
-    array[low] = array[l]
-    array[l] = pivot
-    if (low < l) {
-        sortMe(array, low, l - 1)
-    }
-    if (r < high) {
-        sortMe(array, r + 1, high)
-    }
-}
-```
-![](https://img-blog.csdnimg.cn/img_convert/08588b3ff383e7591394b88507b07f94.png)
-
-# 14. Flutter
-```dart
-List<int> sort(List<int> list) {
-  if (list.length < 2) {
-    return list;
-  } else {
-    var pivot = list[0];
-    var less = <int>[];
-    var greater = <int>[];
-    list.removeAt(0);
-    for (var i in list) {
-      if (i <= pivot) {
-        less.add(i);
+    this.setData({
+      array: array,
+      arrayStr: this.convertToStr(array),
+    })
+  },
+  adjustHeap(array: number[], i: number, length: number) {
+    var tmp = array[i]
+    for (var j = i * 2 + 1; j < length; j = j * 2 + 1) {
+      if (j + 1 < length && array[j] < array[j + 1]) {
+        j++
+      }
+      if (array[j] > tmp) {
+        array[i] = array[j]
+        i = j
       } else {
-        greater.add(i);
+        break
       }
     }
-    return sort(less) + [pivot] + sort(greater);
+    array[i] = tmp
+  }
+```
+![image](https://img-blog.csdnimg.cn/img_convert/b5a21804aa4207db15464f66e939934c.png)
+
+# 10. 鸿蒙(ArkTS)
+开发工具：[下载DevEco Studio](https://developer.harmonyos.com/cn/develop/deveco-studio)
+```js
+sort() {
+    let array = [2, 1, 5, 4, 3]
+    for (var i = Math.floor(array.length / 2) - 1; i >= 0; i--) {
+      this.adjustHeap(array, i, array.length)
+    }
+    for (var j = array.length - 1; j > 0; j--) {
+      var temp = array[0]
+      array[0] = array[j]
+      array[j] = temp
+      this.adjustHeap(array, 0, j)
+    }
+    this.array = array
+  }
+  adjustHeap(array: number[], i: number, length: number) {
+    var tmp = array[i]
+    for (var j = i * 2 + 1; j < length; j = j * 2 + 1) {
+      if (j + 1 < length && array[j] < array[j + 1]) {
+        j++
+      }
+      if (array[j] > tmp) {
+        array[i] = array[j]
+        i = j
+      } else {
+        break
+      }
+    }
+    array[i] = tmp
+  }
+```
+![image](https://img-blog.csdnimg.cn/img_convert/6d192a219105cdd43ca45aa288281214.png)
+# 11. Go语言
+开发工具：[下载Visual Studio Code](https://cxyxy.blog.csdn.net/article/details/128722652)
+```go
+var array = []int{2, 1, 5, 4, 3}
+
+func adjustHeap(currentIndex int, maxLength int) {
+	var noLeafValue = array[currentIndex]
+	for j := 2*currentIndex + 1; j <= maxLength; j = currentIndex*2 + 1 {
+		if j < maxLength && array[j] < array[j+1] {
+			j++
+		}
+		if noLeafValue >= array[j] {
+			break
+		}
+		array[currentIndex] = array[j]
+		currentIndex = j
+	}
+	array[currentIndex] = noLeafValue
+}
+
+func createHeap(length int) {
+	for i := length / 2; i >= 0; i-- {
+		adjustHeap(i, length-1)
+	}
+}
+
+func sort(array []int) {
+	var length = len(array)
+	createHeap(length)
+	for i := length - 1; i > 0; i-- {
+		array[0], array[i] = array[i], array[0]
+		adjustHeap(0, i-1)
+	}
+}
+```
+![image](https://img-blog.csdnimg.cn/img_convert/c85caab1cd20b6dd525fda166920264d.png)
+# 12. Java
+开发工具：[下载IntelliJ IDEA](https://cxyxy.blog.csdn.net/article/details/128722658)
+```java
+ private static void sort(int[] array) {
+        for (int i = array.length / 2 - 1; i >= 0; i--) {
+            adjustHeap(array, i, array.length);
+        }
+        for (int j = array.length - 1; j > 0; j--) {
+            int temp = array[0];
+            array[0] = array[j];
+            array[j] = temp;
+            adjustHeap(array, 0, j);
+        }
+    }
+
+    private static void adjustHeap(int[] array, int i, int length) {
+        int tmp = array[i];
+        for (int j = i * 2 + 1; j < length; j = j * 2 + 1) {
+            if (j + 1 < length && array[j] < array[j + 1]) {
+                j++;
+            }
+            if (array[j] > tmp) {
+                array[i] = array[j];
+                i = j;
+            } else {
+                break;
+            }
+        }
+        array[i] = tmp;
+    }
+```
+![image](https://img-blog.csdnimg.cn/img_convert/40cb29251cb320301163cdd7f171276e.png)
+
+# 13. Kotlin
+开发工具：[下载IntelliJ IDEA](https://cxyxy.blog.csdn.net/article/details/128722658)
+```kotlin
+private fun sort(array: IntArray) {
+    for (i in array.size / 2 - 1 downTo 0) {
+        adjustHeap(array, i, array.size)
+    }
+    for (j in array.size - 1 downTo 1) {
+        val temp = array[0]
+        array[0] = array[j]
+        array[j] = temp
+        adjustHeap(array, 0, j)
+    }
+}
+
+private fun adjustHeap(array: IntArray, _index: Int, length: Int) {
+    var index = _index
+    val tmp = array[index]
+    var j = index * 2 + 1
+    while (j < length) {
+        if (j + 1 < length && array[j] < array[j + 1]) {
+            j++
+        }
+        if (array[j] > tmp) {
+            array[index] = array[j]
+            index = j
+        } else {
+            break
+        }
+        j = j * 2 + 1
+    }
+    array[index] = tmp
+}
+```
+![image](https://img-blog.csdnimg.cn/img_convert/206003262b01d127af1db0a03741985b.png)
+
+# 14. Flutter
+开发工具：[下载IntelliJ IDEA](https://cxyxy.blog.csdn.net/article/details/128722658)
+```dart
+
+void sort(List<int> array) {
+  var startIndex = (array.length / 2 - 1).toInt();
+  for (int i = startIndex; i >= 0; i--) {
+    adjustHeap(array, i, array.length);
+  }
+  for (int j = array.length - 1; j > 0; j--) {
+    int temp = array[0];
+    array[0] = array[j];
+    array[j] = temp;
+    adjustHeap(array, 0, j);
   }
 }
+
+void adjustHeap(List<int> array, int startIndex, int length) {
+  int tmp = array[startIndex];
+  for (int j = startIndex * 2 + 1; j < length; j = j * 2 + 1) {
+    if (j + 1 < length && array[j] < array[j + 1]) {
+      j++;
+    }
+    if (array[j] > tmp) {
+      array[startIndex] = array[j];
+      startIndex = j;
+    } else {
+      break;
+    }
+  }
+  array[startIndex] = tmp;
+}
 ```
-![](https://img-blog.csdnimg.cn/a57f561c0fa4429b854cc31834dc4afc.png)
+![](https://img-blog.csdnimg.cn/img_convert/39afcc60a45a08b9155fdb259fa8c4cc.png)
 
 # 15. C语言
+开发工具：[下载Visual Studio](https://cxyxy.blog.csdn.net/article/details/128722639)
 ```c
 
-void sortMe(int* array, int low, int high)
+void adjustHeap(int* array, int i, int length)
 {
-    if (low >= high)
+    int tmp = array[i];
+    for (int j = i * 2 + 1; j < length; j = j * 2 + 1)
     {
-        return;
-    }
-    int index = array[low];
-    int i = low;
-    int j = high;
-    while (i < j)
-    {
-        while (i < j && array[j] >= index)
+        if (j + 1 < length && array[j] < array[j + 1])
         {
-            j--;
+            j++;
         }
-        if (i < j)
+        if (array[j] > tmp)
         {
             array[i] = array[j];
-            i++;
+            i = j;
         }
-        while (i < j && array[i] < index)
+        else
         {
-            i++;
-        }
-        if (i < j)
-        {
-            array[j] = array[i];
-            j--;
+            break;
         }
     }
-    array[i] = index;
-    sortMe(array, low, i - 1);
-    sortMe(array, i + 1, high);
+    array[i] = tmp;
 }
 
-void sort(int* array, int count)
+ void sort(int* array, int count)
 {
-    sortMe(array, 0, count - 1);
+    for (int i = count / 2 - 1; i >= 0; i--)
+    {
+        adjustHeap(array, i, count);
+    }
+    for (int j = count - 1; j > 0; j--)
+    {
+        int temp = array[0];
+        array[0] = array[j];
+        array[j] = temp;
+        adjustHeap(array, 0, j);
+    }
 }
 ```
-![](https://img-blog.csdnimg.cn/img_convert/0798e17c80f2a8fe637d48fa46ff9fc8.png)
+![image](https://img-blog.csdnimg.cn/img_convert/92f1f1da2dc8392bf15e185e0cb33b89.png)
 
 # 16. C++
+开发工具：[下载Visual Studio](https://cxyxy.blog.csdn.net/article/details/128722639)
 ```cpp
 
-void sortMe(int* array, int low, int high)
+void adjustHeap(int* array, int i, int length)
 {
-    if (low >= high)
+    int tmp = array[i];
+    for (int j = i * 2 + 1; j < length; j = j * 2 + 1)
     {
-        return;
-    }
-    int index = array[low];
-    int i = low;
-    int j = high;
-    while (i < j)
-    {
-        while (i < j && array[j] >= index)
+        if (j + 1 < length && array[j] < array[j + 1])
         {
-            j--;
+            j++;
         }
-        if (i < j)
+        if (array[j] > tmp)
         {
             array[i] = array[j];
-            i++;
+            i = j;
         }
-        while (i < j && array[i] < index)
+        else
         {
-            i++;
-        }
-        if (i < j)
-        {
-            array[j] = array[i];
-            j--;
+            break;
         }
     }
-    array[i] = index;
-    sortMe(array, low, i - 1);
-    sortMe(array, i + 1, high);
+    array[i] = tmp;
 }
 
-
-void sort(int* array, int count)
+ void sort(int* array, int count)
 {
-    sortMe(array, 0, count - 1);
+    for (int i = count / 2 - 1; i >= 0; i--)
+    {
+        adjustHeap(array, i, count);
+    }
+    for (int j = count - 1; j > 0; j--)
+    {
+        int temp = array[0];
+        array[0] = array[j];
+        array[j] = temp;
+        adjustHeap(array, 0, j);
+    }
 }
+
 ```
-![](https://img-blog.csdnimg.cn/img_convert/33ec37ddc4c804056a2411ffd7673ab6.png)
+![image](https://img-blog.csdnimg.cn/img_convert/8d3cc4225f0e4ea2e71af16dfa1f7456.png)
 # 17. C#
+开发工具：[下载Visual Studio](https://cxyxy.blog.csdn.net/article/details/128722639)
 ```csharp
-private static void Sort(int[] array)
-{
-    SortMe(array, 0, array.Length - 1);
-}
-private static void SortMe(int[] array, int low, int high)
-{
-    if (low >= high)
-    {
-        return;
-    }
-    int index = array[low];
-    int i = low;
-    int j = high;
-    while (i < j)
-    {
-        while (i < j && array[j] >= index)
+ private static void Sort(int[] array)
         {
-            j--;
+            for (int i = array.Length / 2 - 1; i >= 0; i--)
+            {
+                AdjustHeap(array, i, array.Length);
+            }
+            for (int j = array.Length - 1; j > 0; j--)
+            {
+                int temp = array[0];
+                array[0] = array[j];
+                array[j] = temp;
+                AdjustHeap(array, 0, j);
+            }
         }
-        if (i < j)
+
+        private static void AdjustHeap(int[] array, int i, int length)
         {
-            array[i] = array[j];
-            i++;
+            int tmp = array[i];
+            for (int j = i * 2 + 1; j < length; j = j * 2 + 1)
+            {
+                if (j + 1 < length && array[j] < array[j + 1])
+                {
+                    j++;
+                }
+                if (array[j] > tmp)
+                {
+                    array[i] = array[j];
+                    i = j;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            array[i] = tmp;
         }
-        while (i < j && array[i] < index)
-        {
-            i++;
-        }
-        if (i < j)
-        {
-            array[j] = array[i];
-            j--;
-        }
-    }
-    array[i] = index;
-    SortMe(array, low, i - 1);
-    SortMe(array, i + 1, high);
-}
 ```
-![](https://img-blog.csdnimg.cn/img_convert/5845e6642e5080a8d0fbee41a3db523a.png)
+![image](https://img-blog.csdnimg.cn/img_convert/2375ab26d2116bd0ab747ae346ec40f8.png)
 
 # 关于
 厦门大学计算机专业|华为八年高级工程师   
