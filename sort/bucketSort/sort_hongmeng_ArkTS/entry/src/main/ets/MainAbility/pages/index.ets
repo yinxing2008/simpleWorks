@@ -36,7 +36,7 @@ struct Lblbc {
       }.margin({ top: 20 })
     }
     .width('100%')
-    .margin({top:100})
+    .margin({ top: 100 })
   }
 
   shuffle() {
@@ -48,8 +48,8 @@ struct Lblbc {
     var brr = []
     var index, buckets, baseVal
     var arrMaxVal, arrMinVal
-    var sortedIndex = 0,
-      n = array.length
+    var sortedIndex = 0
+    var n = array.length
     arrMaxVal = array[0]
     arrMinVal = array[0]
     for (var i = 0; i < n; i++) {
@@ -70,7 +70,7 @@ struct Lblbc {
         brr[index] = [array[i]]
       }
       else if (Array.isArray(brr[index])) {
-        for (var j = brr[index].length - 1;j >= 0 && brr[index][j] > array[i];j--) {
+        for (var j = brr[index].length - 1;j >= 0 && brr[index][j] > array[i]; j--) {
           brr[index][j + 1] = brr[index][j]
         }
         brr[index][j + 1] = array[i]
